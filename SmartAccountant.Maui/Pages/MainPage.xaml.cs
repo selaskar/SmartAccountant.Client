@@ -1,4 +1,6 @@
-﻿using SmartAccountant.Maui.Models;
+﻿using MAUI.MSALClient;
+using Microsoft.Identity.Client;
+using SmartAccountant.Maui.Models;
 using SmartAccountant.Maui.PageModels;
 
 namespace SmartAccountant.Maui.Pages;
@@ -9,5 +11,5 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = model;
-	}
+    }
 }
