@@ -1,7 +1,4 @@
-﻿using SmartAccountant.Maui.Models;
-using SmartAccountant.Maui.PageModels;
-
-namespace SmartAccountant.Maui.Pages;
+﻿namespace SmartAccountant.Maui.Pages;
 
 public partial class MainPage : ContentPage
 {
@@ -9,5 +6,5 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = model;
-	}
+    }
 }
