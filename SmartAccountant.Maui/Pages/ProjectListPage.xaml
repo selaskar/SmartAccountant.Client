@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pageModels="clr-namespace:SmartAccountant.Maui.PageModels"
-             xmlns:models="clr-namespace:SmartAccountant.Maui.Models"
+             xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
              xmlns:controls="clr-namespace:SmartAccountant.Maui.Pages.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SmartAccountant.Maui.Pages.ProjectListPage"
              x:DataType="pageModels:ProjectListPageModel"
-             Title="Projects">
+             Title="Accounts">
 
 
     <ContentPage.Behaviors>
@@ -21,14 +21,14 @@
             Margin="{StaticResource LayoutPadding}" 
             Spacing="{StaticResource LayoutSpacing}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="models:Project">
+                <DataTemplate x:DataType="models:Account">
                     <Border>
                         <VerticalStackLayout Padding="10">
-                            <Label Text="{Binding Name}" FontSize="24" />
-                            <Label Text="{Binding Description}" />
+							<Label Text="{Binding FriendlyName}" FontSize="24" />
                         </VerticalStackLayout>
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToProjectCommand, Source={RelativeSource AncestorType={x:Type pageModels:ProjectListPageModel}}, x:DataType=pageModels:ProjectListPageModel}" CommandParameter="{Binding .}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToProjectCommand, Source={RelativeSource AncestorType={x:Type pageModels:ProjectListPageModel}}, x:DataType=pageModels:ProjectListPageModel}" 
+												  CommandParameter="{Binding .}"/>
                         </Border.GestureRecognizers>
                     </Border>
                 </DataTemplate>

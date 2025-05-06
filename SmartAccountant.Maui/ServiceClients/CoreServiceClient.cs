@@ -3,6 +3,7 @@ using MAUI.MSALClient;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Options;
 using SmartAccountant.Maui.Resources;
+using SmartAccountant.Models;
 
 namespace SmartAccountant.Maui.ServiceClients;
 
@@ -24,20 +25,61 @@ public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<Co
         }
     }
 
+    /// <inheritdoc/>
+    public async Task<IEnumerable<Transaction>> GetTransactions(Guid accountId)
+    {
+        try
+        {
+            var client = GetHttpClient();
+            var transactions = await client.GetFromJsonAsync<IEnumerable<Transaction>>($"/api/transactions?accountId={accountId}");
+
+            return transactions ?? [];
+        }
+        catch (Exception ex)
+        {
+            throw new CoreServiceException(Message.CannotFetchTransactions, ex);
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task<MonthlySummary> GetMonthlySummary(DateOnly month)
+    {
+        try
+        {
+            var client = GetHttpClient();
+            var summary = await client.GetFromJsonAsync<MonthlySummary>($"/api/summary?month={month:yyyy-MM-dd}");
+
+            return summary;
+        }
+        catch (Exception ex)
+        {
+            throw new CoreServiceException(Message.CannotFetchSummary, ex);
+        }
+    }
+
     private HttpClient GetHttpClient()
     {
-        if (_httpClient != null)
-            return _httpClient;
+        if (httpClient != null)
+        {
+            // in case token is refreshed since client is generated.
+            SetAuthHeader(httpClient);
+            return httpClient;
+        }
 
-        _httpClient = httpClientFactory.CreateClient(nameof(CoreServiceClient));
-        _httpClient.BaseAddress = new Uri(options.Value.BaseAddress);
+        httpClient = httpClientFactory.CreateClient(nameof(CoreServiceClient));
+        httpClient.BaseAddress = new Uri(options.Value.BaseAddress);
 
+        SetAuthHeader(httpClient);
+
+        return httpClient;
+    }
+    private HttpClient? httpClient;
+
+    private static void SetAuthHeader(HttpClient httpClient)
+    {
         string? token = PublicClientSingleton.Instance.MSALClientHelper.AuthResult?.AccessToken;
 
-        if (token != null)
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-        return _httpClient;
+        httpClient.DefaultRequestHeaders.Authorization = token != null ? new AuthenticationHeaderValue("Bearer", token)
+            : null;
     }
-    private HttpClient? _httpClient;
 }

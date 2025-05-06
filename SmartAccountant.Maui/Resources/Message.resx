@@ -123,6 +123,12 @@
   <data name="CannotFetchAccounts" xml:space="preserve">
     <value>An error occurred while fetching accounts.</value>
   </data>
+  <data name="CannotFetchSummary" xml:space="preserve">
+    <value>An error occurred while fetching balance summary.</value>
+  </data>
+  <data name="CannotFetchTransactions" xml:space="preserve">
+    <value>An error occurred while fetching transactions.</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>

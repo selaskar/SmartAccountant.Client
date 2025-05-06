@@ -79,6 +79,24 @@ namespace SmartAccountant.Maui.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while fetching balance summary..
+        /// </summary>
+        internal static string CannotFetchSummary {
+            get {
+                return ResourceManager.GetString("CannotFetchSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while fetching transactions..
+        /// </summary>
+        internal static string CannotFetchTransactions {
+            get {
+                return ResourceManager.GetString("CannotFetchTransactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {

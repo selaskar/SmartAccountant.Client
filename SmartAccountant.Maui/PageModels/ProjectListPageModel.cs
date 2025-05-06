@@ -1,33 +1,41 @@
-#nullable disable
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SmartAccountant.Maui.Data;
-using SmartAccountant.Maui.Models;
-using SmartAccountant.Maui.Services;
+using MAUI.MSALClient;
+using SmartAccountant.Maui.Resources;
+using SmartAccountant.Maui.ServiceClients;
+using SmartAccountant.Models;
 
 namespace SmartAccountant.Maui.PageModels;
 
-public partial class ProjectListPageModel : ObservableObject
+public partial class ProjectListPageModel(ICoreServiceClient serviceClient, ModalErrorHandler errorHandler) : ObservableObject
 {
-	private readonly ProjectRepository _projectRepository;
+    private readonly IErrorHandler errorHandler = errorHandler;
 
-	[ObservableProperty]
-	private List<Project> _projects = [];
+    [ObservableProperty]
+	private List<Account> _projects = [];
 
-	public ProjectListPageModel(ProjectRepository projectRepository)
-	{
-		_projectRepository = projectRepository;
-	}
-
-	[RelayCommand]
+    [RelayCommand]
 	private async Task Appearing()
 	{
-		Projects = await _projectRepository.ListAsync();
+		try
+		{
+            if (PublicClientSingleton.Instance.MSALClientHelper.AuthResult == null)
+            {
+                await Shell.Current.DisplayAlert(Message.Error, Message.UserNotAuthenticated, Message.Cancel);
+                return;
+            }
+
+            Projects = [.. await serviceClient.GetAccounts()];
+		}
+		catch (Exception ex)
+		{
+			errorHandler.HandleError(ex);
+		}
 	}
 
 	[RelayCommand]
-	Task NavigateToProject(Project project)
-		=> Shell.Current.GoToAsync($"project?id={project.ID}");
+	Task NavigateToProject(Account account)
+		=> Shell.Current.GoToAsync($"project?id={account.Id}");
 
 	[RelayCommand]
 	async Task AddProject()

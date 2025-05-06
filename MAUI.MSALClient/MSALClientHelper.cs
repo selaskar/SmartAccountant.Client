@@ -81,6 +81,11 @@ namespace MAUI.MSALClient
         /// <returns></returns>
         public async Task InitializePublicClientAppAsync()
         {
+            if (PlatformConfig.RedirectUri == null)
+            {
+                await PlatformConfig.WaitForRedirectUriAsync();
+            }
+
             // Initialize the MSAL library by building a public client application
             this.PublicClientApplication = this.PublicClientApplicationBuilder
                 .WithRedirectUri(PlatformConfig.RedirectUri)   // redirect URI is set later in PlatformConfig when the platform has been decided

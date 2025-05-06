@@ -1,32 +1,33 @@
 using MAUI.MSALClient;
 using Microsoft.Identity.Client;
 using SmartAccountant.Maui.Resources;
-using SmartAccountant.Maui.ServiceClients;
 
 namespace SmartAccountant.Maui.Pages;
 
-public partial class SignIn : ContentPage
+public partial class SignInPage : ContentPage
 {
-    private readonly ICoreServiceClient serviceClient;
-
-    public SignIn(ICoreServiceClient serviceClient)
+    public SignInPage()
     {
         InitializeComponent();
 
-        IAccount? cachedUserAccount = PublicClientSingleton.Instance.MSALClientHelper.FetchSignedInUserFromCache().Result;
-
-        Dispatcher.Dispatch(() =>
+        Dispatcher.DispatchAsync(async () =>
         {
+            IAccount? cachedUserAccount = await PublicClientSingleton.Instance.MSALClientHelper.FetchSignedInUserFromCache();
+
             if (cachedUserAccount == null)
                 return;
 
             txtUserName.Text = cachedUserAccount.Username;
+            await SignIn();
         });
-
-        this.serviceClient = serviceClient;
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await SignIn();
+    }
+
+    private async Task SignIn()
     {
         try
         {
@@ -53,24 +54,5 @@ public partial class SignIn : ContentPage
             txtUserName.Text = "";
             btnLogin.IsEnabled = true;
         });
-    }
-
-    private async void btnServiceCall_Clicked(object sender, EventArgs e)
-    {
-        if (PublicClientSingleton.Instance.MSALClientHelper.AuthResult == null)
-        {
-            await DisplayAlert(Message.Error, Message.UserNotAuthenticated, Message.Cancel);
-            return;
-        }
-
-        try
-        {
-            IEnumerable<Account> accounts = await serviceClient.GetAccounts();
-            await DisplayAlert("Accounts", string.Join(" - ", accounts.Select(x => x.FriendlyName)), Message.Cancel);
-        }
-        catch (CoreServiceException ex)
-        {
-            await DisplayAlert(Message.Error, ex.Message, Message.Cancel);
-        }
     }
 }

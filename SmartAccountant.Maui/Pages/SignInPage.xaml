@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartAccountant.Maui.Pages.SignIn"
-             Title="SignIn">
+             x:Class="SmartAccountant.Maui.Pages.SignInPage"
+             Title="Sign In">
     <VerticalStackLayout>
         <Label 
 			x:Name="txtUserName"
@@ -12,8 +12,6 @@
 
 		<Button x:Name="btnLogin" Clicked="Button_Clicked" Text="Sign in"/>
 		
-		<Button x:Name="btnServiceCall" Clicked="btnServiceCall_Clicked" Text="Service Call"/>
-
 		<Button x:Name="btnLogout" Clicked="SignOutButton_Clicked" Text="Sign out"/>
 	</VerticalStackLayout>
 </ContentPage>

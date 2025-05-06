@@ -79,7 +79,9 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.8" />
+		<PackageReference Include="SmartAccountant.Models" Version="1.0.12" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="29.1.38" />
 		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.2" />
 	</ItemGroup>
 
@@ -88,6 +90,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\SignInPage.xaml.cs">
+	    <DependentUpon>SignInPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Message.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -103,7 +108,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\SignIn.xaml">
+	  <MauiXaml Update="Pages\Controls\SummaryView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MasterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
