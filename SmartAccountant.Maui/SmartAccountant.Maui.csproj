@@ -79,7 +79,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.8" />
-		<PackageReference Include="SmartAccountant.Models" Version="1.0.12" />
+		<PackageReference Include="SmartAccountant.Models" Version="1.0.13" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
 		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="29.1.38" />
 		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.2" />
