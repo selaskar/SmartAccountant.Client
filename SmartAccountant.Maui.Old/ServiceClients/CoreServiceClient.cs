@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using MAUI.MSALClient;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Options;
-using SmartAccountant.Maui.Resources;
+using SmartAccountant.Maui.Old.Resources;
 using SmartAccountant.Models;
 
 namespace SmartAccountant.Maui.ServiceClients;

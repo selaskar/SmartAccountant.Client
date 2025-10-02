@@ -1,6 +1,6 @@
 using MAUI.MSALClient;
 using Microsoft.Identity.Client;
-using SmartAccountant.Maui.Resources;
+using SmartAccountant.Maui.Old.Resources;
 
 namespace SmartAccountant.Maui.Pages;
 
