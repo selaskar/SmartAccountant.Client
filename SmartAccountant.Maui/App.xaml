@@ -11,8 +11,9 @@
 				<ResourceDictionary Source="Resources/Styles/Styles.xaml" />
 				<ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
-			
+
 			<converters:CurrencyConverter x:Key="convCurrency"/>
+			<converters:MonetaryValueConverter x:Key="convMonetaryValue"/>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

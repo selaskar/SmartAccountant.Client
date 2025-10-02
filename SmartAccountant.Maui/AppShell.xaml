@@ -20,18 +20,11 @@
         ContentTemplate="{DataTemplate pages:MasterPage}"
         Route="master" />
 
-    <ShellContent
+	<ShellContent
         Title="Accounts"
         Icon="{StaticResource IconProjects}"
         ContentTemplate="{DataTemplate pages:ProjectListPage}" 
         Route="projects" />
-
-    <ShellContent
-        Title="Manage Meta"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
-        Route="manage" />
-
 
 	<Shell.FlyoutFooter>
         <Grid Padding="15">
