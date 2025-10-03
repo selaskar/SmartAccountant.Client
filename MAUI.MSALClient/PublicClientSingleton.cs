@@ -50,10 +50,10 @@ namespace MAUI.MSALClient
         /// Acquire the token silently
         /// </summary>
         /// <returns>An access token</returns>
-        public async Task<string> AcquireTokenSilentAsync()
+        public async Task<string> AcquireTokenSilentAsync(CancellationToken cancellationToken)
         {
             // Get accounts by policy
-            return await this.AcquireTokenSilentAsync(this.GetScopes()).ConfigureAwait(false);
+            return await this.AcquireTokenSilentAsync(this.GetScopes(), cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace MAUI.MSALClient
         /// </summary>
         /// <param name="scopes">desired scopes</param>
         /// <returns>An access token</returns>
-        public async Task<string> AcquireTokenSilentAsync(string[] scopes)
+        public async Task<string> AcquireTokenSilentAsync(string[] scopes, CancellationToken cancellationToken)
         {
-            return await this.MSALClientHelper.SignInUserAndAcquireAccessToken(scopes).ConfigureAwait(false);
+            return await this.MSALClientHelper.SignInUserAndAcquireAccessToken(scopes, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace MAUI.MSALClient
         /// </summary>
         /// <param name="scopes">desired scopes</param>
         /// <returns></returns>
-        internal async Task<AuthenticationResult> AcquireTokenInteractiveAsync(string[] scopes)
+        internal async Task<AuthenticationResult> AcquireTokenInteractiveAsync(string[] scopes, CancellationToken cancellationToken)
         {
             this.MSALClientHelper.UseEmbedded = this.UseEmbedded;
-            return await this.MSALClientHelper.SignInUserInteractivelyAsync(scopes).ConfigureAwait(false);
+            return await this.MSALClientHelper.SignInUserInteractivelyAsync(scopes, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

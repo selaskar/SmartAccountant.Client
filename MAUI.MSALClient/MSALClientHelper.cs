@@ -79,6 +79,7 @@ namespace MAUI.MSALClient
         /// Initializes the public client application of MSAL.NET with the required information to correctly authenticate the user.
         /// </summary>
         /// <returns></returns>
+        [MemberNotNull(nameof(PublicClientApplication))]
         public async Task InitializePublicClientAppAsync()
         {
             if (PlatformConfig.RedirectUri == null)
@@ -124,7 +125,7 @@ namespace MAUI.MSALClient
         /// </summary>
         /// <param name="scopes"></param>
         /// <returns> Access Token</returns>
-        public async Task<string> SignInUserAndAcquireAccessToken(string[] scopes)
+        public async Task<string> SignInUserAndAcquireAccessToken(string[] scopes, CancellationToken cancellationToken)
         {
             if (this.PublicClientApplication == null)
                 await InitializePublicClientAppAsync();
@@ -138,12 +139,12 @@ namespace MAUI.MSALClient
                 {
                     this.AuthResult = await this.PublicClientApplication
                         .AcquireTokenSilent(scopes, existingUser)
-                        .ExecuteAsync()
+                        .ExecuteAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
                 else
                 {
-                    this.AuthResult = await SignInUserInteractivelyAsync(scopes);
+                    this.AuthResult = await SignInUserInteractivelyAsync(scopes, cancellationToken);
                 }
             }
             catch (MsalUiRequiredException ex)
@@ -201,7 +202,7 @@ namespace MAUI.MSALClient
         /// <param name="scopes">The scopes.</param>
         /// <param name="existingAccount">The existing account.</param>
         /// <returns></returns>
-        public async Task<AuthenticationResult> SignInUserInteractivelyAsync(string[] scopes, IAccount existingAccount = null)
+        public async Task<AuthenticationResult> SignInUserInteractivelyAsync(string[] scopes, CancellationToken cancellationToken, IAccount? existingAccount = null)
         {
             if (this.PublicClientApplication == null)
                 await InitializePublicClientAppAsync();
@@ -209,16 +210,16 @@ namespace MAUI.MSALClient
             // If the operating system has UI
             if (this.PublicClientApplication.IsUserInteractive())
             {
-                SystemWebViewOptions systemWebViewOptions = new SystemWebViewOptions();
+                SystemWebViewOptions systemWebViewOptions = new();
 #if IOS
                 // Hide the privacy prompt in iOS
                 systemWebViewOptions.iOSHidePrivacyPrompt = true;
 #endif
                 return await this.PublicClientApplication.AcquireTokenInteractive(scopes)
-                    .WithLoginHint(existingAccount?.Username ?? String.Empty)
+                    .WithLoginHint(existingAccount?.Username ?? string.Empty)
                     .WithSystemWebViewOptions(systemWebViewOptions)
                     .WithParentActivityOrWindow(PlatformConfig.ParentWindow)
-                    .ExecuteAsync()
+                    .ExecuteAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
 

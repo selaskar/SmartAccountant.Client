@@ -31,7 +31,7 @@ public partial class SignInPage : ContentPage
     {
         try
         {
-            await PublicClientSingleton.Instance.AcquireTokenSilentAsync();
+            await PublicClientSingleton.Instance.AcquireTokenSilentAsync(CancellationToken.None);
             IAccount? cachedUserAccount = await PublicClientSingleton.Instance.MSALClientHelper.FetchSignedInUserFromCache();
             txtUserName.Text = cachedUserAccount?.Username;
         }

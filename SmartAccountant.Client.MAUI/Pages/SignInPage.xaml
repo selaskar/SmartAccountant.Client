@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="SmartAccountant.Client.MAUI.Pages.SignInPage"
+			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
+			 x:DataType="viewModels:SignInPageModel"
+			 Title="Sign-In">
+	<Grid>
+
+		<VerticalStackLayout>
+			<Label Text="{Binding Username}"
+				   VerticalOptions="Center"
+				   HorizontalOptions="Center" />
+
+			<Button Margin="3"
+					Text="Sign In"
+					Command="{Binding SignInCommand}" />
+
+			<Button Margin="3"
+					Text="Sign Out"
+					Command="{Binding SignOutCommand}" />
+		</VerticalStackLayout>
+
+		<ActivityIndicator IsRunning="{Binding IsBusy}"
+						   IsVisible="{Binding IsBusy}"
+						   Background="LightGray"
+						   Opacity="0.5"/>
+	</Grid>
+</ContentPage>
