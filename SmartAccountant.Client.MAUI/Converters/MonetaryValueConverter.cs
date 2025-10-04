@@ -3,7 +3,7 @@ using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.MAUI.Converters;
 
-public class MonetaryValueConverter : IValueConverter
+internal class MonetaryValueConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

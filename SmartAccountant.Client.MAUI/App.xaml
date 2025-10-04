@@ -12,6 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
 
 			<converters:MonetaryValueConverter x:Key="convMonetaryValue" />
+			<converters:TransactionColorConverter x:Key="convTransactionColor" />
 		</ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -30,7 +30,7 @@
 									<RowDefinition Height="Auto" />
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
-								
+
 								<RoundRectangle Grid.RowSpan="2"
 												CornerRadius="10"
 												BackgroundColor="Azure"
@@ -60,7 +60,7 @@
 												CornerRadius="10"
 												BackgroundColor="Bisque"
 												Opacity="0.5" />
-								
+
 								<Label Grid.Row="0"
 									   Margin="5"
 									   FontSize="24"
@@ -98,10 +98,10 @@
 						</ViewCell>
 					</DataTemplate>
 
-					<pages:PersonDataTemplateSelector x:Key="templateSelector"
-													  SavingAccountTemplate="{StaticResource saving}"
-													  CreditCardTemplate="{StaticResource creditCard}"
-													  VirtualCardTemplate="{StaticResource virtual}" />
+					<pages:AccountDataTemplateSelector x:Key="templateSelector"
+													   SavingAccountTemplate="{StaticResource saving}"
+													   CreditCardTemplate="{StaticResource creditCard}"
+													   VirtualCardTemplate="{StaticResource virtual}" />
 				</ScrollView.Resources>
 
 				<ListView HorizontalOptions="Start"

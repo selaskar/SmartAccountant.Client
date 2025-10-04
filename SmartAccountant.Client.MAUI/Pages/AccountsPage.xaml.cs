@@ -25,7 +25,7 @@ public partial class AccountsPage : ContentPage
     }
 }
 
-public class PersonDataTemplateSelector : DataTemplateSelector
+public class AccountDataTemplateSelector : DataTemplateSelector
 {
     public DataTemplate? SavingAccountTemplate { get; set; }
 
