@@ -1,6 +1,7 @@
+using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.Models;
 
-namespace SmartAccountant.Maui.ServiceClients;
+namespace SmartAccountant.ApiClient.Abstract;
 
 public interface ICoreServiceClient
 {

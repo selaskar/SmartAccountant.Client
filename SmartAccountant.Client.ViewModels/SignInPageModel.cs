@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MAUI.MSALClient;
+using SmartAccountant.Client.Core.Abstract;
+using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.ViewModels.Services;
 
 namespace SmartAccountant.Client.ViewModels;
 
-public partial class SignInPageModel : ObservableObject
+public partial class SignInPageModel : ViewModelBase
 {
     private readonly IErrorHandler errorHandler;
     private readonly ICurrentUser currentUser;
@@ -15,24 +17,25 @@ public partial class SignInPageModel : ObservableObject
         this.errorHandler = errorHandler;
         this.currentUser = currentUser;
 
-        Initialize();
+        _ = Initialize();
     }
-
-    [ObservableProperty]
-    public partial bool IsBusy { get; set; }
 
     [NotifyCanExecuteChangedFor(nameof(SignInCommand))]
     [NotifyCanExecuteChangedFor(nameof(SignOutCommand))]
     [ObservableProperty]
     public partial string? Username { get; set; }
 
-    private async void Initialize()
+    private async Task Initialize()
     {
         IsBusy = true;
 
         try
         {
-            Username = (await currentUser.Account)?.Username;
+            Username = (await currentUser.Account)?.GetDisplayName();
+
+            // If there is sign-in info, silently fetch access token.
+            if (Username != null)
+                await SignIn();
         }
         catch (Exception ex)
         {
@@ -56,7 +59,7 @@ public partial class SignInPageModel : ObservableObject
             var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
 
             await PublicClientSingleton.Instance.AcquireTokenSilentAsync(cts.Token);
-            Username = (await currentUser.Account)?.Username;
+            Username = (await currentUser.Account)?.GetDisplayName();
         }
         catch (Exception ex)
         {
