@@ -26,6 +26,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MAUI.MSALClient\MAUI.MSALClient.csproj" />
+	  <ProjectReference Include="..\SmartAccountant.ApiClient\SmartAccountant.ApiClient.csproj" />
+	  <ProjectReference Include="..\SmartAccountant.Client.Core\SmartAccountant.Client.Core.csproj" />
 	</ItemGroup>
 
 </Project>

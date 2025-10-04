@@ -1,6 +1,6 @@
 ﻿using Microsoft.Identity.Client;
 
-namespace SmartAccountant.Maui.Extensions;
+namespace SmartAccountant.Client.Core.Extensions;
 
 public static class IAccountExtensions
 {

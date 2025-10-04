@@ -3,8 +3,7 @@ using CommunityToolkit.Maui;
 using MAUI.MSALClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SmartAccountant.Maui.Infrastructure;
-using SmartAccountant.Maui.ServiceClients;
+using SmartAccountant.ApiClient.Extensions;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -44,7 +43,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ManageMetaPageModel>();
 
         builder.Services.AddSingleton<ICurrentUser, CurrentUser>();
-        
+
         builder.Services.AddTransient<MasterPage>();
         builder.Services.AddTransient<MasterPageModel>();
 
@@ -53,22 +52,14 @@ public static class MauiProgram
 
 
         IConfiguration appConfiguration = GetConfig();
+        builder.Configuration.AddConfiguration(appConfiguration);
 
         AzureAdConfig? azureADConfig = appConfiguration.GetRequiredSection("AzureAd").Get<AzureAdConfig>();
         DownStreamApiConfig? downStreamApiConfig = appConfiguration.GetRequiredSection("DownstreamApi").Get<DownStreamApiConfig>();
 
         PublicClientSingleton.Instance.Initialize(azureADConfig, downStreamApiConfig);
 
-        builder.Configuration.AddConfiguration(appConfiguration);
-        builder.Services.AddOptions<CoreServiceOptions>()
-            .BindConfiguration("CoreService");
-
-        builder.Services.AddSingleton<DangerousHttpClientHandler>();
-
-        builder.Services.AddHttpClient(nameof(CoreServiceClient))
-                .ConfigurePrimaryHttpMessageHandler<DangerousHttpClientHandler>();
-
-        builder.Services.AddTransient<ICoreServiceClient, CoreServiceClient>();
+        builder.Services.RegisterApiClient(appConfiguration.GetRequiredSection("CoreService"));
 
         return builder.Build();
     }

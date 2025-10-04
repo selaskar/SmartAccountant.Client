@@ -2,8 +2,8 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Maui.Models;
-using SmartAccountant.Maui.ServiceClients;
 using SmartAccountant.Models;
 
 namespace SmartAccountant.Maui.PageModels;

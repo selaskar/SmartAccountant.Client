@@ -1,13 +1,17 @@
-using System.Net.Http.Json;
-using MAUI.MSALClient;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
-using SmartAccountant.Maui.Old.Resources;
+using SmartAccountant.ApiClient.Abstract;
+using SmartAccountant.ApiClient.Exceptions;
+using SmartAccountant.ApiClient.Options;
+using SmartAccountant.ApiClient.Resources;
+using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Models;
 
-namespace SmartAccountant.Maui.ServiceClients;
+namespace SmartAccountant.ApiClient;
 
-public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<CoreServiceOptions> options) : ICoreServiceClient //TODO: implement disposable
+internal class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<CoreServiceOptions> options, ICurrentUser currentUser)
+    : ICoreServiceClient //TODO: implement disposable
 {
     /// <inheritdoc/>
     public async Task<IEnumerable<Account>> GetAccounts()
@@ -21,7 +25,7 @@ public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<Co
         }
         catch (Exception ex)
         {
-            throw new CoreServiceException(Message.CannotFetchAccounts, ex);
+            throw new CoreServiceException(Messages.CannotFetchAccounts, ex);
         }
     }
 
@@ -37,7 +41,7 @@ public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<Co
         }
         catch (Exception ex)
         {
-            throw new CoreServiceException(Message.CannotFetchTransactions, ex);
+            throw new CoreServiceException(Messages.CannotFetchTransactions, ex);
         }
     }
 
@@ -53,7 +57,7 @@ public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<Co
         }
         catch (Exception ex)
         {
-            throw new CoreServiceException(Message.CannotFetchSummary, ex);
+            throw new CoreServiceException(Messages.CannotFetchSummary, ex);
         }
     }
 
@@ -75,11 +79,12 @@ public class CoreServiceClient(IHttpClientFactory httpClientFactory, IOptions<Co
     }
     private HttpClient? httpClient;
 
-    private static void SetAuthHeader(HttpClient httpClient)
+    private void SetAuthHeader(HttpClient httpClient)
     {
-        string? token = PublicClientSingleton.Instance.MSALClientHelper.AuthResult?.AccessToken;
+        string? token = currentUser.AccessToken;
 
-        httpClient.DefaultRequestHeaders.Authorization = token != null ? new AuthenticationHeaderValue("Bearer", token)
+        httpClient.DefaultRequestHeaders.Authorization = token != null
+            ? new AuthenticationHeaderValue("Bearer", token)
             : null;
     }
 }

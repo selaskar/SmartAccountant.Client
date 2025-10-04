@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.Client.MAUI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.Client.ViewModels", "SmartAccountant.Client.ViewModels\SmartAccountant.Client.ViewModels.csproj", "{C748D26B-9C37-4390-BD61-2F93FDEB625D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.ApiClient", "SmartAccountant.ApiClient\SmartAccountant.ApiClient.csproj", "{674530E7-62AE-4E01-BE98-97C59374AD1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.Client.Core", "SmartAccountant.Client.Core\SmartAccountant.Client.Core.csproj", "{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{C748D26B-9C37-4390-BD61-2F93FDEB625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C748D26B-9C37-4390-BD61-2F93FDEB625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C748D26B-9C37-4390-BD61-2F93FDEB625D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{674530E7-62AE-4E01-BE98-97C59374AD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{674530E7-62AE-4E01-BE98-97C59374AD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{674530E7-62AE-4E01-BE98-97C59374AD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{674530E7-62AE-4E01-BE98-97C59374AD1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

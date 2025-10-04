@@ -87,6 +87,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MAUI.MSALClient\MAUI.MSALClient.csproj" />
+	  <ProjectReference Include="..\SmartAccountant.ApiClient\SmartAccountant.ApiClient.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

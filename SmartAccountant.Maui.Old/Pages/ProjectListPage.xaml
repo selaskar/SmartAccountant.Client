@@ -9,7 +9,6 @@
              x:DataType="pageModels:ProjectListPageModel"
              Title="Accounts">
 
-
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior
                 EventName="Appearing"                

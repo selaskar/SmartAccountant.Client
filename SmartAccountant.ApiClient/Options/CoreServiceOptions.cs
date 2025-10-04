@@ -1,4 +1,4 @@
-﻿namespace SmartAccountant.Maui.ServiceClients;
+﻿namespace SmartAccountant.ApiClient.Options;
 
 public record CoreServiceOptions
 {
