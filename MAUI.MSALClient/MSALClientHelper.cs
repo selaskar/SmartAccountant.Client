@@ -243,6 +243,8 @@ namespace MAUI.MSALClient
                 return;
 
             await this.SignOutUserAsync(existingUser).ConfigureAwait(false);
+
+            AuthResult = null;
         }
 
         /// <summary>

@@ -3,6 +3,8 @@ using CommunityToolkit.Maui;
 using MAUI.MSALClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SmartAccountant.ApiClient.Extensions;
+using SmartAccountant.Client.MAUI.Pages;
 using SmartAccountant.Client.MAUI.Services;
 using SmartAccountant.Client.ViewModels.Extensions;
 using SmartAccountant.Client.ViewModels.Services;
@@ -27,14 +29,18 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        Routing.RegisterRoute("//accounts/transactions", typeof(TransactionsPage));
+
         IConfiguration appConfiguration = GetConfig();
         builder.Configuration.AddConfiguration(appConfiguration);
 
         ConfigureAuthentication(appConfiguration);
 
+        builder.Services.AddSingleton<IErrorHandler, ModalErrorHandler>();
+
         builder.Services.RegisterViewModels();
 
-        builder.Services.AddSingleton<IErrorHandler, ModalErrorHandler>();
+        builder.Services.RegisterApiClient(appConfiguration.GetRequiredSection("CoreService"));
 
         return builder.Build();
     }
@@ -55,10 +61,8 @@ public static class MauiProgram
     {
         var assembly = Assembly.GetExecutingAssembly();
         string embeddedConfigFileName = $"{assembly.GetName().Name}.appsettings.json";
-        using Stream? stream = assembly.GetManifestResourceStream(embeddedConfigFileName);
-
-        if (stream == null)
-            throw new Exception("app.settings file could not be found");
+        using Stream? stream = assembly.GetManifestResourceStream(embeddedConfigFileName) 
+            ?? throw new Exception("app.settings file could not be found");
 
         return new ConfigurationBuilder()
             .AddJsonStream(stream)

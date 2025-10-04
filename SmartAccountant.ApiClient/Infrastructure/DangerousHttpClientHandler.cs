@@ -1,8 +1,7 @@
 ﻿using System.Net.Security;
 
-namespace SmartAccountant.Maui.Infrastructure;
+namespace SmartAccountant.ApiClient.Infrastructure;
 
-//TODO: move to lib
 internal partial class DangerousHttpClientHandler : HttpClientHandler
 {
     /// <summary>
@@ -15,7 +14,7 @@ internal partial class DangerousHttpClientHandler : HttpClientHandler
             if (sslPolicyErrors == SslPolicyErrors.None)
                 return true;
 #if !DEBUG
-                return false;
+            return false;
 #endif
 
             return sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors || sslPolicyErrors == (SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateChainErrors);
