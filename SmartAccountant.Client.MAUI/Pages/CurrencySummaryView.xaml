@@ -6,90 +6,127 @@
 			 x:Class="SmartAccountant.Client.MAUI.Pages.CurrencySummaryView"
 			 x:DataType="models:CurrencySummary">
 
-	<Grid Margin="5"
-		  WidthRequest="300"
-		  HorizontalOptions="Start">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
+	<ScrollView>
+		<FlexLayout Wrap="Wrap"
+					Direction="Row"
+					JustifyContent="Start"
+					AlignItems="Start"
+					AlignContent="Start">
 
-		<Label Grid.Row="0"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Total Expenses:" />
-		<Label Grid.Row="0"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   Text="{Binding ExpensesTotal, Converter={StaticResource convMonetaryValue}}" />
+			<Grid Margin="5"
+				  WidthRequest="300">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
 
-		<Label Grid.Row="1"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Total Loans:" />
-		<Label Grid.Row="1"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   TextColor="{Binding LoansTotal.Amount, Converter={StaticResource convPositiveRed}}"
-			   Text="{Binding LoansTotal, Converter={StaticResource convMonetaryValue}}" />
+				<Label Grid.Row="0"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Total Expenses:" />
+				<Label Grid.Row="0"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   Text="{Binding ExpensesTotal, Converter={StaticResource convMonetaryValue}}" />
 
-		<Label Grid.Row="2"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Total Income:" />
-		<Label Grid.Row="2"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   Text="{Binding IncomeTotal, Converter={StaticResource convMonetaryValue}}" />
+				<Label Grid.Row="1"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Total Loans:" />
+				<Label Grid.Row="1"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   TextColor="{Binding LoansTotal.Amount, Converter={StaticResource convPositiveRed}}"
+					   Text="{Binding LoansTotal, Converter={StaticResource convMonetaryValue}}" />
 
-		<Label Grid.Row="3"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Total Savings:" />
-		<Label Grid.Row="3"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   TextColor="{Binding SavingsTotal.Amount, Converter={StaticResource convPositiveGreen}}"
-			   Text="{Binding SavingsTotal, Converter={StaticResource convMonetaryValue}}" />
+				<Label Grid.Row="2"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Total Income:" />
+				<Label Grid.Row="2"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   Text="{Binding IncomeTotal, Converter={StaticResource convMonetaryValue}}" />
 
-		<Label Grid.Row="4"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Net:" />
-		<Label Grid.Row="4"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   TextColor="{Binding Net.Amount, Converter={StaticResource convPositiveGreen}}"
-			   Text="{Binding Net, Converter={StaticResource convMonetaryValue}}" />
+				<Label Grid.Row="3"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Total Savings:" />
+				<Label Grid.Row="3"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   TextColor="{Binding SavingsTotal.Amount, Converter={StaticResource convPositiveGreen}}"
+					   Text="{Binding SavingsTotal, Converter={StaticResource convMonetaryValue}}" />
 
-		<Label Grid.Row="5"
-			   Grid.Column="0"
-			   Margin="5"
-			   Text="Remanining Cash:" />
-		<Label Grid.Row="5"
-			   Grid.Column="1"
-			   Margin="5"
-			   HorizontalTextAlignment="End"
-			   TextDecorations="Underline"
-			   TextColor="{Binding RemainingBalancesTotal.Amount, Converter={StaticResource convPositiveGreen}}"
-			   Text="{Binding RemainingBalancesTotal, Converter={StaticResource convMonetaryValue}}" />
-	</Grid>
+				<Label Grid.Row="4"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Interest and Fees:" />
+				<Label Grid.Row="4"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   TextColor="{Binding InterestAndFeesTotal.Amount, Converter={StaticResource convPositiveRed}}"
+					   Text="{Binding InterestAndFeesTotal, Converter={StaticResource convMonetaryValue}}" />
+
+				<Label Grid.Row="5"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Net:" />
+				<Label Grid.Row="5"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   TextColor="{Binding Net.Amount, Converter={StaticResource convPositiveGreen}}"
+					   Text="{Binding Net, Converter={StaticResource convMonetaryValue}}" />
+
+				<Label Grid.Row="6"
+					   Grid.Column="0"
+					   Margin="5"
+					   Text="Remanining Cash:" />
+				<Label Grid.Row="6"
+					   Grid.Column="1"
+					   Margin="5"
+					   HorizontalTextAlignment="End"
+					   TextDecorations="Underline"
+					   TextColor="{Binding RemainingBalancesTotal.Amount, Converter={StaticResource convPositiveGreen}}"
+					   Text="{Binding RemainingBalancesTotal, Converter={StaticResource convMonetaryValue}}" />
+			</Grid>
+
+			<!-- Expenses breakdown -->
+			<VerticalStackLayout Margin="5"
+								 WidthRequest="200"
+								 BindableLayout.EmptyView="No expense data"
+								 BindableLayout.ItemsSource="{Binding ExpensesBreakdown}">
+				<BindableLayout.ItemTemplate>
+					<DataTemplate x:DataType="{x:Null}">
+						<Grid>
+							<Label Margin="2" Text="{Binding Key, StringFormat='{0}: ', Converter={StaticResource convEnumDisplayName}}" />
+							<Label HorizontalOptions="End"
+								   Text="{Binding Value, Converter={StaticResource convMonetaryValue}}" />
+						</Grid>
+					</DataTemplate>
+				</BindableLayout.ItemTemplate>
+			</VerticalStackLayout>
+		</FlexLayout>
+	</ScrollView>
 </ContentView>

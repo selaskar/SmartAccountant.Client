@@ -7,19 +7,25 @@
 			 x:DataType="viewModels:SummaryPageModel"
 			 Title="Summary">
 	<Grid>
-		<VerticalStackLayout>
-			<Picker HorizontalOptions="Start"
-					Margin="15"
-					ItemsSource="{Binding Months,Mode=OneTime}"
-					ItemDisplayBinding="{Binding Label}"
-					SelectedItem="{Binding SelectedMonth}" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-			<pages:CurrencySummaryView BindingContext="{Binding Summary.Currencies[0]}" />
-		</VerticalStackLayout>
+		<Picker Grid.Row="0"
+				HorizontalOptions="Start"
+				Margin="15"
+				ItemsSource="{Binding Months,Mode=OneTime}"
+				ItemDisplayBinding="{Binding Label}"
+				SelectedItem="{Binding SelectedMonth}" />
 
-		<ActivityIndicator IsRunning="{Binding IsBusy}"
-						   IsVisible="{Binding IsBusy}"
+		<pages:CurrencySummaryView Grid.Row="1"
+								   BindingContext="{Binding Summary.Currencies[0]}" />
+
+		<ActivityIndicator Grid.RowSpan="2"
 						   Background="LightGray"
-						   Opacity="0.5" />
+						   Opacity="0.5"
+						   IsRunning="{Binding IsBusy}"
+						   IsVisible="{Binding IsBusy}" />
 	</Grid>
 </ContentPage>
