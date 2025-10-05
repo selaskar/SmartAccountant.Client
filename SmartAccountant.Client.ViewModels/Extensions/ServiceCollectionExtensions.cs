@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<SignInPageModel>();
         services.AddTransient<AccountsPageModel>();
         services.AddTransient<TransactionsPageModel>();
+        services.AddTransient<SummaryPageModel>();
 
         return services;
     }

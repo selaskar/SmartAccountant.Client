@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using MAUI.MSALClient;
 using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Client.Core.Extensions;
-using SmartAccountant.Maui.Models;
+using SmartAccountant.Client.Models;
 using SmartAccountant.Models;
 
 namespace SmartAccountant.Maui.PageModels;
@@ -78,7 +78,7 @@ public partial class MasterPageModel : ObservableObject
         {
             Summary = await serviceClient.GetMonthlySummary(month);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             //TODO:
         }

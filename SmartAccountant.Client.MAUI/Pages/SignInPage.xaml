@@ -8,9 +8,10 @@
 	<Grid>
 
 		<VerticalStackLayout>
-			<Label Text="{Binding Username}"
-				   VerticalOptions="Center"
-				   HorizontalOptions="Center" />
+			<Label VerticalOptions="Center"
+				   HorizontalOptions="Center"
+				   IsVisible="{Binding Username, Converter={StaticResource convNotNull}}"
+				   Text="{Binding Username, StringFormat='Welcome, {0}!'}" />
 
 			<Button Margin="3"
 					Text="Sign In"
@@ -24,6 +25,6 @@
 		<ActivityIndicator IsRunning="{Binding IsBusy}"
 						   IsVisible="{Binding IsBusy}"
 						   Background="LightGray"
-						   Opacity="0.5"/>
+						   Opacity="0.5" />
 	</Grid>
 </ContentPage>

@@ -13,10 +13,12 @@
 
 		<RefreshView Grid.Row="0"
 					 Margin="5"
+					 WidthRequest="300"
+					 HorizontalOptions="Start"
 					 IsRefreshing="{Binding IsBusy}"
 					 Command="{Binding FetchTransactionsCommand}">
 			<ScrollView>
-				<ListView ItemsSource="{Binding Transactions}">
+				<ListView Margin="0,0,10,0" ItemsSource="{Binding Transactions}">
 					<ListView.ItemTemplate>
 						<DataTemplate x:DataType="models:Transaction">
 							<ViewCell>
@@ -26,10 +28,16 @@
 										<RowDefinition Height="25" />
 									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="180" />
-										<ColumnDefinition Width="100" />
+										<ColumnDefinition Width="9*" />
+										<ColumnDefinition Width="5*" />
 									</Grid.ColumnDefinitions>
 
+									<RoundRectangle Grid.RowSpan="2"
+													Grid.ColumnSpan="2"
+													CornerRadius="10"
+													BackgroundColor="{Binding Category, Converter={StaticResource convTransactionCategory}}"
+													Opacity="0.5" />
+									
 									<Label Margin="5"
 										   Grid.Row="0"
 										   Grid.Column="0"
@@ -38,7 +46,7 @@
 									<Label Margin="5"
 										   Grid.Row="0"
 										   Grid.Column="1"
-										   TextColor="{Binding ., Converter={StaticResource convTransactionColor}}"
+										   HorizontalTextAlignment="End"
 										   Text="{Binding Amount, Converter={StaticResource convMonetaryValue}}" />
 
 									<Label Margin="5"

@@ -104,7 +104,7 @@
 													   VirtualCardTemplate="{StaticResource virtual}" />
 				</ScrollView.Resources>
 
-				<ListView HorizontalOptions="Start"
+				<ListView Margin="0,0,5,0"
 						  ItemsSource="{Binding Accounts}"
 						  ItemTapped="ListView_ItemTapped"
 						  ItemTemplate="{StaticResource templateSelector}">

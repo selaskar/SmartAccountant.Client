@@ -3,17 +3,19 @@
 	   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	   xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
-	   Title="SmartAccountant.Client.MAUI">
+	   Title="Smart Accountant">
 
-	<FlyoutItem Title="Sign-in" IsEnabled="True">
+	<FlyoutItem Title="Sign-in"
+				IsEnabled="True">
 		<Tab>
 			<ShellContent Title="Sign-in"
 						  ContentTemplate="{DataTemplate pages:SignInPage}"
 						  Route="signIn" />
 		</Tab>
 	</FlyoutItem>
-	
-	<FlyoutItem Title="Accounts" IsVisible="True">
+
+	<FlyoutItem Title="Accounts"
+				IsVisible="True">
 		<Tab>
 			<ShellContent Title="Accounts"
 						  ContentTemplate="{DataTemplate pages:AccountsPage}"
@@ -21,4 +23,12 @@
 		</Tab>
 	</FlyoutItem>
 
+	<FlyoutItem Title="Summary"
+				IsVisible="True">
+		<Tab>
+			<ShellContent Title="Summary"
+						  ContentTemplate="{DataTemplate pages:SummaryPage}"
+						  Route="summary" />
+		</Tab>
+	</FlyoutItem>
 </Shell>
