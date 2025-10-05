@@ -1,18 +1,27 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SmartAccountant.Client.MAUI"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:SmartAccountant.Client.MAUI"
 			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 x:Class="SmartAccountant.Client.MAUI.App">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+				<ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
 
 			<converters:MonetaryValueConverter x:Key="convMonetaryValue" />
-			<converters:TransactionColorConverter x:Key="convTransactionColor" />
+			<converters:TransactionAmountConverter x:Key="convTransactionAmount" />
+			<converters:TransactionCategoryConverter x:Key="convTransactionCategory" />
+			<toolkit:IsNotNullConverter x:Key="convNotNull" />
+			<converters:DecimalSignToColorConverter x:Key="convPositiveGreen"
+													PositiveColor="Green"
+													NegativeColor="Red" />
+			<converters:DecimalSignToColorConverter x:Key="convPositiveRed"
+													PositiveColor="Red"
+													NegativeColor="Green" />
 		</ResourceDictionary>
-    </Application.Resources>
+	</Application.Resources>
 </Application>

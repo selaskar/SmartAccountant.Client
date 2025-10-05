@@ -10,7 +10,7 @@ internal class MonetaryValueConverter : IValueConverter
         if (value is not MonetaryValue monetaryValue)
             return null;
 
-        string amountString = monetaryValue.Amount.ToString("F2");
+        string amountString = monetaryValue.Amount.ToString("N2");
 
         string? currencySymbol = monetaryValue.Currency switch
         {

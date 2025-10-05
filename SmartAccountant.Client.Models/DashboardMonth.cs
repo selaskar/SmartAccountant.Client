@@ -1,4 +1,4 @@
-﻿namespace SmartAccountant.Maui.Models;
+﻿namespace SmartAccountant.Client.Models;
 
 public record DashboardMonth
 {
