@@ -50,6 +50,7 @@ namespace MAUI.MSALClient
         /// Acquire the token silently
         /// </summary>
         /// <returns>An access token</returns>
+        /// <exception cref="OperationCanceledException"/>
         public async Task<string> AcquireTokenSilentAsync(CancellationToken cancellationToken)
         {
             // Get accounts by policy
@@ -61,6 +62,7 @@ namespace MAUI.MSALClient
         /// </summary>
         /// <param name="scopes">desired scopes</param>
         /// <returns>An access token</returns>
+        /// <exception cref="OperationCanceledException"/>
         public async Task<string> AcquireTokenSilentAsync(string[] scopes, CancellationToken cancellationToken)
         {
             return await this.MSALClientHelper.SignInUserAndAcquireAccessToken(scopes, cancellationToken).ConfigureAwait(false);

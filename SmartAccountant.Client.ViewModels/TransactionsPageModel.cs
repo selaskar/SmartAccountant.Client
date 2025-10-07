@@ -10,11 +10,13 @@ namespace SmartAccountant.Client.ViewModels;
 
 public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServiceClient serviceClient) : ViewModelBase, IQueryAttributable
 {
+    public const string AccountIdKey = "AccountId";
+
     private Guid accountId;
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        accountId = (Guid)query["AccountId"];
+        accountId = (Guid)query[AccountIdKey];
 
         Refresh();
     }
@@ -23,13 +25,13 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
     public partial ObservableCollection<Transaction>? Transactions { get; set; }
 
     [RelayCommand]
-    private async Task FetchTransactions()
+    private async Task FetchTransactions(CancellationToken cancellationToken)
     {
         IsBusy = true;
 
         try
         {
-            Transactions = (await serviceClient.GetTransactions(accountId))
+            Transactions = (await serviceClient.GetTransactions(accountId, cancellationToken))
                 .OrderByDescending(t => t.Timestamp)
                 .ToObservable();
         }

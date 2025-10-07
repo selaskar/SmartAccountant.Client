@@ -18,20 +18,20 @@ public partial class AccountsPageModel : ViewModelBase
         this.errorHandler = errorHandler;
         this.serviceClient = serviceClient;
 
-        _ = FetchAccounts();
+        _ = FetchAccounts(CancellationToken.None);
     }
 
     [ObservableProperty]
     public partial ObservableCollection<Account>? Accounts { get; set; }
 
     [RelayCommand]
-    private async Task FetchAccounts()
+    private async Task FetchAccounts(CancellationToken cancellationToken)
     {
         IsBusy = true;
 
         try
         {
-            Accounts = (await serviceClient.GetAccounts())
+            Accounts = (await serviceClient.GetAccounts(cancellationToken))
                 .OrderBy(a => a.FriendlyName)
                 .ToObservable();
         }

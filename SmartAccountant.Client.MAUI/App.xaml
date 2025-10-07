@@ -12,10 +12,11 @@
 				<ResourceDictionary Source="Resources/Styles/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
+			<toolkit:IsNotNullConverter x:Key="convNotNull" />
+			
 			<converters:MonetaryValueConverter x:Key="convMonetaryValue" />
 			<converters:TransactionAmountConverter x:Key="convTransactionAmount" />
 			<converters:TransactionCategoryConverter x:Key="convTransactionCategory" />
-			<toolkit:IsNotNullConverter x:Key="convNotNull" />
 			<converters:DecimalSignToColorConverter x:Key="convPositiveGreen"
 													PositiveColor="Green"
 													NegativeColor="Red" />
@@ -23,6 +24,8 @@
 													PositiveColor="Red"
 													NegativeColor="Green" />
 			<converters:EnumDisplayNameConverter x:Key="convEnumDisplayName" />
+			<converters:DateOnlyConverter x:Key="convDateOnly" />
+			<converters:TimeOnlyConverter x:Key="convTimeOnly" />
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>
