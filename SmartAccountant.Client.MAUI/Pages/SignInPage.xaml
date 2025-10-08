@@ -5,26 +5,24 @@
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
 			 x:DataType="viewModels:SignInPageModel"
 			 Title="Sign-In">
-	<Grid>
+	
+	<VerticalStackLayout>
+		<Label VerticalOptions="Center"
+			   HorizontalOptions="Center"
+			   IsVisible="{Binding Username, Converter={StaticResource convNotNull}}"
+			   Text="{Binding Username, StringFormat='Welcome, {0}!'}" />
 
-		<VerticalStackLayout>
-			<Label VerticalOptions="Center"
-				   HorizontalOptions="Center"
-				   IsVisible="{Binding Username, Converter={StaticResource convNotNull}}"
-				   Text="{Binding Username, StringFormat='Welcome, {0}!'}" />
+		<Button Margin="3"
+				Text="Sign In"
+				Command="{Binding SignInCommand}" />
 
-			<Button Margin="3"
-					Text="Sign In"
-					Command="{Binding SignInCommand}" />
+		<Button Margin="3"
+				Text="Cancel"
+				IsVisible="{Binding IsBusy}"
+				Command="{Binding SignInCancelCommand}" />
 
-			<Button Margin="3"
-					Text="Sign Out"
-					Command="{Binding SignOutCommand}" />
-		</VerticalStackLayout>
-
-		<ActivityIndicator IsRunning="{Binding IsBusy}"
-						   IsVisible="{Binding IsBusy}"
-						   Background="LightGray"
-						   Opacity="0.5" />
-	</Grid>
+		<Button Margin="3"
+				Text="Sign Out"
+				Command="{Binding SignOutCommand}" />
+	</VerticalStackLayout>
 </ContentPage>

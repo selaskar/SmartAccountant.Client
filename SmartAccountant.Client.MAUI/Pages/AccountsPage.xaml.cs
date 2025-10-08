@@ -19,7 +19,7 @@ public partial class AccountsPage : ContentPage
 
         var navigationParameter = new Dictionary<string, object>
         {
-            { "AccountId", account.Id }
+            { TransactionsPageModel.AccountIdKey, account.Id }
         };
         await Shell.Current.GoToAsync("/transactions", navigationParameter);
     }

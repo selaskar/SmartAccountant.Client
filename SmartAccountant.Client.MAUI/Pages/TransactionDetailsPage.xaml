@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
+			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
+			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
+			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
+			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
+			 x:DataType="viewModels:TransactionDetailsPageModel"
+			 Title="Transaction Details Page">
+
+	<ScrollView MaximumWidthRequest="400"
+				HorizontalOptions="Start">
+		<Grid Margin="5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Row="0"
+				   Grid.ColumnSpan="2"
+				   Margin="5"
+				   HorizontalOptions="Center"
+				   VerticalOptions="Center"
+				   FontAttributes="Bold"
+				   Text="{Binding Transaction.Description}" />
+
+
+			<Label Grid.Row="1"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Amount" />
+			<pages:MonetaryAmountEditor Grid.Row="1"
+										Grid.Column="1"
+										Amount="{Binding Amount}" />
+
+
+			<Label Grid.Row="2"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Date" />
+			<DatePicker Grid.Row="2"
+						Grid.Column="1"
+						Margin="5"
+						Date="{Binding Date, Converter={StaticResource convDateOnly}}" />
+
+			<Label Grid.Row="3"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Time" />
+			<!-- Has uneven margin to justify the label to center. -->
+			<TimePicker Grid.Row="3"
+						Grid.Column="1"
+						Margin="5,15,0,0"
+						Time="{Binding Time, Converter={StaticResource convTimeOnly}}" />
+
+			<Label Grid.Row="4"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Timezone" />
+			<Picker Grid.Row="4"
+					Grid.Column="1"
+					Margin="5"
+					ItemsSource="{Binding TimeZones, Mode=OneTime}"
+					ItemDisplayBinding="{Binding DisplayName}"
+					SelectedItem="{Binding SelectedTimeZone}" />
+
+			<Label Grid.Row="5"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Category" />
+			<CollectionView Grid.Row="5"
+							Grid.Column="1"
+							Margin="5"
+							HorizontalOptions="Start"
+							WidthRequest="200"
+							SelectionMode="None"
+							ItemsSource="{Binding MainCategories}"
+							SelectedItem="{Binding SelectedMainCategory}">
+				<CollectionView.ItemTemplate>
+					<DataTemplate x:DataType="models:MainCategory">
+						<Grid Padding="0,10,0,0"
+							  Opacity="0.5"
+							  BackgroundColor="{Binding .,Converter={StaticResource convTransactionCategory}}">
+							<Grid.Resources>
+								<converters:EnumBooleanConverter x:Key="convEnumBool"
+																 x:DataType="{x:Null}"
+																 BindingContext="{x:Reference radio}"
+																 Parameter="{Binding BindingContext}" />
+							</Grid.Resources>
+
+							<!-- Without an explicit width, radio button doesn't expand horizontally. -->
+							<RadioButton WidthRequest="190"
+										 FontAttributes="Bold"
+										 HorizontalOptions="Fill"
+										 x:Name="radio"
+										 GroupName="categories"
+										 Content="{Binding .,Converter={StaticResource convEnumDisplayName}}"
+										 IsChecked="{Binding SelectedMainCategory, Converter={StaticResource convEnumBool}, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewModels:TransactionDetailsPageModel}}}" />
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+
+			<Label Grid.Row="6"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
+				   Text="Note" />
+			<Editor  Grid.Row="6"
+					 Grid.Column="1"
+					 Margin="5"
+					 HeightRequest="150"
+					 Placeholder="Take a note" 
+					 MaxLength="500"
+					 Text="{Binding Transaction.PersonalNote}"/>
+		</Grid>
+	</ScrollView>
+</ContentPage>
