@@ -5,7 +5,7 @@
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.MonetaryAmountEditor"
 			 x:Name="@this">
-	<Grid BackgroundColor="AliceBlue">
+	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="*" />

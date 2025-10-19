@@ -1,22 +1,31 @@
-﻿
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using FluentValidation;
+using FluentValidation.Results;
 using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.ViewModels;
 
 public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttributable
 {
-
     public const string TransactionObjectKey = "Transaction";
+
+    private static readonly AbstractValidator<Transaction> _validator = new TransactionValidator();
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         Transaction = (Transaction)query[TransactionObjectKey];
+
+        Transaction.BeginEdit();
     }
 
     [ObservableProperty]
     public partial Transaction Transaction { get; set; }
+
+    [ObservableProperty]
+    public partial ValidationResult? ValidationResult { get; set; }
 
     partial void OnTransactionChanged(Transaction value)
     {
@@ -27,6 +36,9 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
         Offset = value.Timestamp.Offset;
 
         SelectedMainCategory = value.Category.Category;
+
+        if (value.Category.Category == MainCategory.Expense)
+            SelectedSubCategory = value.Category.SubCategory;
     }
 
     [ObservableProperty]
@@ -55,6 +67,28 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
     public IEnumerable<MainCategory> MainCategories { get; } = Enum.GetValues<MainCategory>();
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ExpenseCategorySelected))]
     public partial MainCategory SelectedMainCategory { get; set; }
-}
 
+    partial void OnSelectedMainCategoryChanged(MainCategory value)
+    {
+        SelectedSubCategory = -1;
+    }
+
+    public bool ExpenseCategorySelected => SelectedMainCategory == MainCategory.Expense;
+
+    public IEnumerable<ExpenseSubCategories> ExpenseSubCategories { get; } = Enum.GetValues<ExpenseSubCategories>();
+
+    [ObservableProperty]
+    public partial short SelectedSubCategory { get; set; } = -1;
+
+    [RelayCommand(CanExecute = nameof(CanSave))]
+    private async Task Save()
+    {
+        Transaction.Category = new TransactionCategory(SelectedMainCategory, SelectedSubCategory != -1 ? (byte)SelectedSubCategory : (byte)0);
+
+        Transaction.EndEdit();
+    }
+
+    private bool CanSave() => ValidationResult?.IsValid == true;
+}

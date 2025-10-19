@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:syncfusion="http://schemas.syncfusion.com/maui/toolkit"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
-			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
 			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
+			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
 			 x:DataType="viewModels:TransactionDetailsPageModel"
 			 Title="Transaction Details Page">
 
-	<ScrollView MaximumWidthRequest="400"
-				HorizontalOptions="Start">
+	<ScrollView HorizontalOptions="Start"
+				MaximumWidthRequest="400">
 		<Grid Margin="5">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -55,6 +59,7 @@
 						Margin="5"
 						Date="{Binding Date, Converter={StaticResource convDateOnly}}" />
 
+
 			<Label Grid.Row="3"
 				   Grid.Column="0"
 				   Margin="5"
@@ -66,6 +71,7 @@
 						Margin="5,15,0,0"
 						Time="{Binding Time, Converter={StaticResource convTimeOnly}}" />
 
+
 			<Label Grid.Row="4"
 				   Grid.Column="0"
 				   Margin="5"
@@ -75,8 +81,9 @@
 					Grid.Column="1"
 					Margin="5"
 					ItemsSource="{Binding TimeZones, Mode=OneTime}"
-					ItemDisplayBinding="{Binding DisplayName}"
+					ItemDisplayBinding="{Binding DisplayName,x:DataType={x:Null}}"
 					SelectedItem="{Binding SelectedTimeZone}" />
+
 
 			<Label Grid.Row="5"
 				   Grid.Column="0"
@@ -93,9 +100,7 @@
 							SelectedItem="{Binding SelectedMainCategory}">
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="models:MainCategory">
-						<Grid Padding="0,10,0,0"
-							  Opacity="0.5"
-							  BackgroundColor="{Binding .,Converter={StaticResource convTransactionCategory}}">
+						<Grid Padding="0,2">
 							<Grid.Resources>
 								<converters:EnumBooleanConverter x:Key="convEnumBool"
 																 x:DataType="{x:Null}"
@@ -103,10 +108,15 @@
 																 Parameter="{Binding BindingContext}" />
 							</Grid.Resources>
 
+							<Border Opacity="0.5"
+									BackgroundColor="{Binding .,Converter={StaticResource convTransactionCategory}}" />
+
 							<!-- Without an explicit width, radio button doesn't expand horizontally. -->
 							<RadioButton WidthRequest="190"
 										 FontAttributes="Bold"
 										 HorizontalOptions="Fill"
+										 Margin="0,10,0,0"
+										 Opacity="1"
 										 x:Name="radio"
 										 GroupName="categories"
 										 Content="{Binding .,Converter={StaticResource convEnumDisplayName}}"
@@ -116,18 +126,54 @@
 				</CollectionView.ItemTemplate>
 			</CollectionView>
 
+
 			<Label Grid.Row="6"
 				   Grid.Column="0"
 				   Margin="5"
 				   VerticalTextAlignment="Center"
+				   Text="Sub-category"
+				   IsVisible="{Binding ExpenseCategorySelected}" />
+			<Picker Grid.Row="6"
+					Grid.Column="1"
+					Margin="5"
+					IsVisible="{Binding ExpenseCategorySelected}"
+					ItemDisplayBinding="{Binding Converter={StaticResource convEnumDisplayName}}"
+					ItemsSource="{Binding ExpenseSubCategories}"
+					SelectedIndex="{Binding SelectedSubCategory, Mode=TwoWay}" />
+
+
+			<Label Grid.Row="7"
+				   Grid.Column="0"
+				   Margin="5"
+				   VerticalTextAlignment="Center"
 				   Text="Note" />
-			<Editor  Grid.Row="6"
+			<Editor  Grid.Row="7"
 					 Grid.Column="1"
 					 Margin="5"
 					 HeightRequest="150"
-					 Placeholder="Take a note" 
+					 Placeholder="Take a note"
 					 MaxLength="500"
-					 Text="{Binding Transaction.PersonalNote}"/>
+					 Text="{Binding Transaction.PersonalNote}" />
+
+
+			<syncfusion:SfTextInputLayout Grid.Row="8"
+										   Grid.Column="1"
+										   Margin="5"
+										  ContainerType="Outlined"
+										  Hint="Reference Number"
+										  HelperText="Assigned by the bank"
+										  HasError="False"
+										  ErrorText="OLmaz">
+				<Entry MaxLength="100"
+					   Text="{Binding Transaction.ReferenceNumber}" />
+			</syncfusion:SfTextInputLayout>
+
+
+			<Button Grid.Row="9"
+					Grid.Column="1"
+					Margin="5"
+					Text="Save"
+					Command="{Binding SaveCommand}" />
 		</Grid>
 	</ScrollView>
 </ContentPage>

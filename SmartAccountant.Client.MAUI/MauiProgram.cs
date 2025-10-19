@@ -8,6 +8,7 @@ using SmartAccountant.Client.MAUI.Pages;
 using SmartAccountant.Client.MAUI.Services;
 using SmartAccountant.Client.ViewModels.Extensions;
 using SmartAccountant.Client.ViewModels.Services;
+using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace SmartAccountant.Client.MAUI;
 
@@ -19,6 +20,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .ConfigureSyncfusionToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -11,14 +11,13 @@ namespace SmartAccountant.Client.ViewModels;
 public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServiceClient serviceClient) : ViewModelBase, IQueryAttributable
 {
     public const string AccountIdKey = "AccountId";
-
     private Guid accountId;
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         accountId = (Guid)query[AccountIdKey];
 
-        Refresh();
+        _ = FetchTransactions(CancellationToken.None);
     }
 
     [ObservableProperty]
@@ -48,7 +47,8 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
 
     [NotifyCanExecuteChangedFor(nameof(RefreshCommand))]
     [ObservableProperty]
-    public override partial bool IsBusy { get; set; }
+    //For refresh view's busy indicator to show during load, we set this true beforehand.
+    public override partial bool IsBusy { get; set; } = true;
 
     private bool CanRefresh => !IsBusy;
 

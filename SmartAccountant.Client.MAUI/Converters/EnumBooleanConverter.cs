@@ -2,6 +2,9 @@
 
 namespace SmartAccountant.Client.MAUI.Converters;
 
+/// <summary>
+/// For scenarios where parameter binding is necessary.
+/// </summary>
 internal partial class EnumBooleanConverter : BindableObject, IValueConverter
 {
     public static readonly BindableProperty ParameterProperty = BindableProperty.Create(nameof(Parameter), typeof(Enum), typeof(EnumBooleanConverter));
@@ -20,7 +23,7 @@ internal partial class EnumBooleanConverter : BindableObject, IValueConverter
         if (Enum.IsDefined(value.GetType(), value) == false)
             return Binding.DoNothing;
 
-        return value.Equals(Parameter);
+        return value.Equals(Parameter ?? parameter);
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -31,9 +34,9 @@ internal partial class EnumBooleanConverter : BindableObject, IValueConverter
         if (!b)
             return Binding.DoNothing;
 
-        if (Parameter == null)
+        if ((Parameter ?? parameter) == null)
             return Binding.DoNothing;
 
-        return Parameter;
+        return (Parameter ?? parameter)!; //Certainly not going to be null.
     }
 }

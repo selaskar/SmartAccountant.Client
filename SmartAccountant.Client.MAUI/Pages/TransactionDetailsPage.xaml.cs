@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Behaviors;
 using SmartAccountant.Client.ViewModels;
 
 namespace SmartAccountant.Client.MAUI.Pages;
@@ -9,5 +10,7 @@ public partial class TransactionDetailsPage : ContentPage
 		InitializeComponent();
 
 		BindingContext =  viewModel;
+
+		TextValidationBehavior ad;
 	}
 }

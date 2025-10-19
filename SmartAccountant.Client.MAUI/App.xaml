@@ -13,6 +13,7 @@
 			</ResourceDictionary.MergedDictionaries>
 
 			<toolkit:IsNotNullConverter x:Key="convNotNull" />
+			<toolkit:EnumToBoolConverter x:Key="convEnumToBool" />
 			
 			<converters:MonetaryValueConverter x:Key="convMonetaryValue" />
 			<converters:TransactionAmountConverter x:Key="convTransactionAmount" />
