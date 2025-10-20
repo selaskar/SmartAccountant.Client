@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FluentValidation;
-using FluentValidation.Results;
 using SmartAccountant.Models;
+using SmartAccountant.Models.Validators;
 
 namespace SmartAccountant.Client.ViewModels;
 
@@ -12,11 +10,13 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
 {
     public const string TransactionObjectKey = "Transaction";
 
-    private static readonly AbstractValidator<Transaction> _validator = new TransactionValidator();
-
+    /// <exception cref="ArgumentNullException"/>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        ArgumentNullException.ThrowIfNull(query);
+
         Transaction = (Transaction)query[TransactionObjectKey];
+        Transaction2 = new Models.Transaction();
 
         Transaction.BeginEdit();
     }
@@ -25,7 +25,7 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
     public partial Transaction Transaction { get; set; }
 
     [ObservableProperty]
-    public partial ValidationResult? ValidationResult { get; set; }
+    public partial Models.Transaction? Transaction2 { get; set; }
 
     partial void OnTransactionChanged(Transaction value)
     {
@@ -87,8 +87,11 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
     {
         Transaction.Category = new TransactionCategory(SelectedMainCategory, SelectedSubCategory != -1 ? (byte)SelectedSubCategory : (byte)0);
 
+        if (!CanSave())
+            return;
+
         Transaction.EndEdit();
     }
 
-    private bool CanSave() => ValidationResult?.IsValid == true;
+    private bool CanSave() => !Transaction2?.HasErrors ?? false;
 }

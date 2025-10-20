@@ -10,7 +10,5 @@ public partial class TransactionDetailsPage : ContentPage
 		InitializeComponent();
 
 		BindingContext =  viewModel;
-
-		TextValidationBehavior ad;
-	}
+    }
 }

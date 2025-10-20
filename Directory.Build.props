@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <AnalysisLevel>latest-All</AnalysisLevel>
+    
+    <!-- In order to use partial auto-properties feature of C# 14. -->
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+</Project>

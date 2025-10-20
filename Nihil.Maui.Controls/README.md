@@ -1,0 +1,1 @@
+﻿Syncfusion Toolkit for MAUI initialization.

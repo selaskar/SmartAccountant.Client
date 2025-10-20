@@ -101,6 +101,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Nihil.Maui.Controls\Nihil.Maui.Controls.csproj" />
 	  <ProjectReference Include="..\SmartAccountant.Client.ViewModels\SmartAccountant.Client.ViewModels.csproj" />
 	</ItemGroup>
 

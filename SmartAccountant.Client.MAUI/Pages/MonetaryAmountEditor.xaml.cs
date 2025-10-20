@@ -26,7 +26,9 @@ public partial class MonetaryAmountEditor : ContentView
 
     public static void AmountChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var instance = (MonetaryAmountEditor)bindable;
+        if (bindable is not MonetaryAmountEditor instance)
+            return;
+
         var newMonetaryValue = (MonetaryValue)newValue;
 
         string newAmountString = newMonetaryValue.Amount.ToString("N2");

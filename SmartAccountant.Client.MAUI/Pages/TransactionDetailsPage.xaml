@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:syncfusion="http://schemas.syncfusion.com/maui/toolkit"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
+			 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
 			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
@@ -156,17 +156,12 @@
 					 Text="{Binding Transaction.PersonalNote}" />
 
 
-			<syncfusion:SfTextInputLayout Grid.Row="8"
-										   Grid.Column="1"
-										   Margin="5"
-										  ContainerType="Outlined"
-										  Hint="Reference Number"
-										  HelperText="Assigned by the bank"
-										  HasError="False"
-										  ErrorText="OLmaz">
-				<Entry MaxLength="100"
-					   Text="{Binding Transaction.ReferenceNumber}" />
-			</syncfusion:SfTextInputLayout>
+			<nihil:AdvancedEntry Grid.Row="8"
+								 Grid.Column="1"
+								 Margin="5"
+								 Text="{Binding Transaction2.ReferenceNumber}" 
+								 Object="{Binding Transaction2}"
+								 PropertyName="ReferenceNumber"/>
 
 
 			<Button Grid.Row="9"
