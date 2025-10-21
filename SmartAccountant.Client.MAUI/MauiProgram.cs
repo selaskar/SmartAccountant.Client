@@ -8,6 +8,7 @@ using SmartAccountant.Client.MAUI.Pages;
 using SmartAccountant.Client.MAUI.Services;
 using SmartAccountant.Client.ViewModels.Extensions;
 using SmartAccountant.Client.ViewModels.Services;
+using Syncfusion.Licensing;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -28,6 +29,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        //TODO: move to config. explanation to readme
+        SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JFaF5cXGRCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWH9feXVRRGFZUUx3WUFWYEg=");
 
 #if DEBUG
         builder.Logging.AddDebug();

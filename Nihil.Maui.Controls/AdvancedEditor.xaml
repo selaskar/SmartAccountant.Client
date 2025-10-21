@@ -3,12 +3,12 @@
 						 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 						 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
 						 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
-						 x:Class="Nihil.Maui.Controls.AdvancedEntry">
-	<!--xmlns:syncfusion="http://schemas.syncfusion.com/maui/toolkit"-->
+						 x:Class="Nihil.Maui.Controls.AdvancedEditor">
 
 	<syncfusion:SfTextInputLayout x:Name="inputLayout"
 								  ContainerType="Outlined">
-		<Entry x:Name="txtEntry"
-			   TextChanged="Entry_TextChanged" />
+		<Editor x:Name="txtEntry" 
+				AutoSize="TextChanges"
+				TextChanged="Entry_TextChanged" />
 	</syncfusion:SfTextInputLayout>
 </nihil:AdvancedEntryBase>

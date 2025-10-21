@@ -14,6 +14,14 @@ public partial class Transaction : BaseModel
         set => SetProperty(ref field, value, validate: true);
     }
 
+    [StringLength(500)]
+    [Display(Name = nameof(Strings.Transaction_PersonalNote), ResourceType = typeof(Strings))]
+    public string? PersonalNote
+    {
+        get;
+        set => SetProperty(ref field, value, validate: true);
+    }
+
     private protected override void CopyValuesFrom([NotNull] BaseModel other)
     {
         base.CopyValuesFrom(other);
@@ -28,7 +36,7 @@ public partial class Transaction : BaseModel
         //Timestamp = transaction.Timestamp;
         //Amount = transaction.Amount;
         //Description = transaction.Description;
-        //PersonalNote = transaction.PersonalNote;
+        PersonalNote = transaction.PersonalNote;
         //Category = transaction.Category;
     }
 }

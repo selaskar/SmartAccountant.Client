@@ -27,6 +27,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AdvancedEditor.xaml.cs">
+	    <DependentUpon>AdvancedEditor.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AdvancedEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="AdvancedEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

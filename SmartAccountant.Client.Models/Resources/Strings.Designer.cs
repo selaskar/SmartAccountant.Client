@@ -61,6 +61,15 @@ namespace SmartAccountant.Client.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Personal Note.
+        /// </summary>
+        public static string Transaction_PersonalNote {
+            get {
+                return ResourceManager.GetString("Transaction_PersonalNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reference Number.
         /// </summary>
         public static string Transaction_ReferenceNumber {

@@ -8,7 +8,7 @@
 			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
 			 x:DataType="viewModels:TransactionDetailsPageModel"
-			 Title="Transaction Details Page">
+			 Title="Transaction Details">
 
 	<ScrollView HorizontalOptions="Start"
 				MaximumWidthRequest="400">
@@ -142,7 +142,7 @@
 					SelectedIndex="{Binding SelectedSubCategory, Mode=TwoWay}" />
 
 
-			<Label Grid.Row="7"
+			<!--<Label Grid.Row="7"
 				   Grid.Column="0"
 				   Margin="5"
 				   VerticalTextAlignment="Center"
@@ -153,7 +153,15 @@
 					 HeightRequest="150"
 					 Placeholder="Take a note"
 					 MaxLength="500"
-					 Text="{Binding Transaction.PersonalNote}" />
+					 Text="{Binding Transaction.PersonalNote}" />-->
+
+			<nihil:AdvancedEditor Grid.Row="7"
+								 Grid.Column="1"
+								 Margin="5"
+								 HeightRequest="150"
+								 Text="{Binding Transaction2.PersonalNote}"
+								 Object="{Binding Transaction2}"
+								 PropertyName="PersonalNote" />
 
 
 			<nihil:AdvancedEntry Grid.Row="8"

@@ -2,9 +2,9 @@ using Syncfusion.Maui.Core;
 
 namespace Nihil.Maui.Controls;
 
-public partial class AdvancedEntry : AdvancedEntryBase
+public partial class AdvancedEditor : AdvancedEntryBase
 {
-    public AdvancedEntry()
+    public AdvancedEditor()
     {
         InitializeComponent();
     }
