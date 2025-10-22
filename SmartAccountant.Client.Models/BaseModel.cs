@@ -17,8 +17,12 @@ public abstract class BaseModel : ObservableValidator, IEditableObject
     [MemberNotNullWhen(true, nameof(_backup))]
     public bool IsEditing { get; private set; }
 
+    /// <exception cref="InvalidOperationException"/>
     public void BeginEdit()
     {
+        if (IsEditing)
+            throw new InvalidOperationException("Object is already in editing mode.");
+
         _backup = MemberwiseClone() as BaseModel;
         _backup!.CopyValuesFrom(this);
 
@@ -29,7 +33,6 @@ public abstract class BaseModel : ObservableValidator, IEditableObject
     public void CancelEdit()
     {
         if (!IsEditing)
-            //TODO: localize
             throw new InvalidOperationException("Object is not in editing mode.");
 
         CopyValuesFrom(_backup);

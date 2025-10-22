@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SmartAccountant.Client.Models.Resources;
+using SmartAccountant.Shared;
 using SmartAccountant.Shared.Structs;
 
 namespace SmartAccountant.Client.Models;
@@ -13,25 +14,25 @@ public partial class Transaction : BaseModel
     public Account? Account { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(100)]
+    [StringLength(100, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
     [Display(Name = nameof(Strings.Transaction_ReferenceNumber), Description = nameof(Strings.Transaction_ReferenceNumber_Description), ResourceType = typeof(Strings))]
     public partial string? ReferenceNumber { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [Range(typeof(DateTimeOffset), "2000.01.01", "2100.01.01")]
+    [Range(typeof(DateTimeOffset), ApplicationDefinitions.EpochStartString, ApplicationDefinitions.EpochEndString)]
     public partial DateTimeOffset Timestamp { get; set; }
 
     [ObservableProperty]
-    //TODO: maximum and minimum value validation
+    //TODO: maximum and minimum value validation with custom attribute
     public partial MonetaryValue Amount { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(500)]
+    [StringLength(500, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
     [Display(Name = nameof(Strings.Transaction_PersonalNote), ResourceType = typeof(Strings))]
     public partial string? PersonalNote { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(500)]
+    [StringLength(500, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
     public partial string? Description { get; set; }
 
     [ObservableProperty]

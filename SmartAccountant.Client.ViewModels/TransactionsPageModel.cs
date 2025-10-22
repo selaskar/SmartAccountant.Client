@@ -15,10 +15,12 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (!query.Any())
+            return;
+
         accountId = (Guid)query[AccountIdKey];
 
-        if (Transactions == null)
-            _ = FetchTransactions(CancellationToken.None);
+        _ = FetchTransactions(CancellationToken.None);
     }
 
     [ObservableProperty]

@@ -1,4 +1,3 @@
-using CommunityToolkit.Maui.Behaviors;
 using SmartAccountant.Client.ViewModels;
 
 namespace SmartAccountant.Client.MAUI.Pages;

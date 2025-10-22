@@ -17,7 +17,8 @@ public partial class TransactionsPage : ContentPage
         if (e.Item is not Transaction transaction)
             return;
 
-        var navigationParameter = new Dictionary<string, object>
+        // See comments about ShellNavigationQueryParameters in AccountsPage.ListView_ItemTapped.
+        var navigationParameter = new ShellNavigationQueryParameters
         {
             { TransactionDetailsPageModel.TransactionObjectKey, transaction }
         };

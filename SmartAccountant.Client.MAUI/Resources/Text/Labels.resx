@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TransactionDetailsPage_Amount_Label" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TransactionDetailsPage_Category_Label" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="TransactionDetailsPage_Date_Label" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="TransactionDetailsPage_SubCategory_Placeholder" xml:space="preserve">
     <value>Select a sub-category</value>
+  </data>
+  <data name="TransactionDetailsPage_TimeZone_Label" xml:space="preserve">
+    <value>Time Zone</value>
+  </data>
+  <data name="TransactionDetailsPage_Time_Label" xml:space="preserve">
+    <value>Time</value>
   </data>
 </root>

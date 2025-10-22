@@ -61,6 +61,15 @@ namespace SmartAccountant.Client.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} cannot be longer than {1} chars..
+        /// </summary>
+        public static string Max_Length_Error {
+            get {
+                return ResourceManager.GetString("Max_Length_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal Note.
         /// </summary>
         public static string Transaction_PersonalNote {

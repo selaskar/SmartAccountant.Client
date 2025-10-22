@@ -126,4 +126,7 @@
   <data name="Transaction_ReferenceNumber_Description" xml:space="preserve">
     <value>Assigned by the bank</value>
   </data>
+  <data name="Max_Length_Error" xml:space="preserve">
+    <value>{0} cannot be longer than {1} chars.</value>
+  </data>
 </root>
