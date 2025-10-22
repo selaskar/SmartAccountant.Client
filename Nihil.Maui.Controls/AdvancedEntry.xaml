@@ -4,7 +4,6 @@
 						 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
 						 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
 						 x:Class="Nihil.Maui.Controls.AdvancedEntry">
-	<!--xmlns:syncfusion="http://schemas.syncfusion.com/maui/toolkit"-->
 
 	<syncfusion:SfTextInputLayout x:Name="inputLayout"
 								  ContainerType="Outlined">

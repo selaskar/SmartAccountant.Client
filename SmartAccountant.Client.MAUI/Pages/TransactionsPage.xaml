@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
 			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionsPage"
@@ -11,14 +12,13 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<!-- TODO: This may be unnecessary around list view. -->
-		<RefreshView Grid.Row="0"
-					 Margin="5"
-					 WidthRequest="300"
-					 HorizontalOptions="Start"
-					 IsRefreshing="{Binding IsBusy}"
-					 Command="{Binding FetchTransactionsCommand}">
-			<ScrollView>
+		<syncfusion:SfPullToRefresh Grid.Row="0"
+									Margin="5"
+									WidthRequest="300"
+									HorizontalOptions="Start"
+									IsRefreshing="{Binding IsBusy}"
+									RefreshCommand="{Binding FetchTransactionsCommand}">
+			<syncfusion:SfPullToRefresh.PullableContent>
 				<ListView Margin="0,0,10,0"
 						  ItemTapped="ListView_ItemTapped"
 						  ItemsSource="{Binding Transactions}">
@@ -63,7 +63,7 @@
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>
-			</ScrollView>
-		</RefreshView>
+			</syncfusion:SfPullToRefresh.PullableContent>
+		</syncfusion:SfPullToRefresh>
 	</Grid>
 </ContentPage>

@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.9" />
-    <PackageReference Include="SmartAccountant.Models" Version="1.0.26" />
+    <PackageReference Include="SmartAccountant.Dtos" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

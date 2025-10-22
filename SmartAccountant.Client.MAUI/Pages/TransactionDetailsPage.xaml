@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:sfInputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
 			 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
 			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
+			 xmlns:resx="clr-namespace:SmartAccountant.Client.MAUI.Resources.Text"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
 			 x:DataType="viewModels:TransactionDetailsPageModel"
 			 Title="Transaction Details">
 
 	<ScrollView HorizontalOptions="Start"
 				MaximumWidthRequest="400">
-		<Grid Margin="5">
+		<Grid Margin="15,5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -81,7 +83,7 @@
 					Grid.Column="1"
 					Margin="5"
 					ItemsSource="{Binding TimeZones, Mode=OneTime}"
-					ItemDisplayBinding="{Binding DisplayName,x:DataType={x:Null}}"
+					ItemDisplayBinding="{Binding DisplayName}"
 					SelectedItem="{Binding SelectedTimeZone}" />
 
 
@@ -127,49 +129,33 @@
 			</CollectionView>
 
 
-			<Label Grid.Row="6"
-				   Grid.Column="0"
-				   Margin="5"
-				   VerticalTextAlignment="Center"
-				   Text="Sub-category"
-				   IsVisible="{Binding ExpenseCategorySelected}" />
-			<Picker Grid.Row="6"
-					Grid.Column="1"
-					Margin="5"
-					IsVisible="{Binding ExpenseCategorySelected}"
-					ItemDisplayBinding="{Binding Converter={StaticResource convEnumDisplayName}}"
-					ItemsSource="{Binding ExpenseSubCategories}"
-					SelectedIndex="{Binding SelectedSubCategory, Mode=TwoWay}" />
-
-
-			<!--<Label Grid.Row="7"
-				   Grid.Column="0"
-				   Margin="5"
-				   VerticalTextAlignment="Center"
-				   Text="Note" />
-			<Editor  Grid.Row="7"
-					 Grid.Column="1"
-					 Margin="5"
-					 HeightRequest="150"
-					 Placeholder="Take a note"
-					 MaxLength="500"
-					 Text="{Binding Transaction.PersonalNote}" />-->
-
-			<nihil:AdvancedEditor Grid.Row="7"
+			<sfInputs:SfComboBox Grid.Row="6"
 								 Grid.Column="1"
 								 Margin="5"
-								 HeightRequest="150"
-								 Text="{Binding Transaction2.PersonalNote}"
-								 Object="{Binding Transaction2}"
-								 PropertyName="PersonalNote" />
+								 HeightRequest="60"
+								 IsEditable="True"
+								 Placeholder="{x:Static resx:Labels.TransactionDetailsPage_SubCategory_Placeholder}"
+								 IsVisible="{Binding ExpenseCategorySelected}"
+								 DisplayMemberPath="DisplayName"
+								 ItemsSource="{Binding ExpenseSubCategories}"
+								 SelectedIndex="{Binding SelectedSubCategory, Mode=TwoWay}" />
+
+
+			<nihil:AdvancedEditor Grid.Row="7"
+								  Grid.Column="1"
+								  Margin="5"
+								  HeightRequest="150"
+								  Text="{Binding Transaction2.PersonalNote}"
+								  Object="{Binding Transaction2}"
+								  PropertyName="PersonalNote" />
 
 
 			<nihil:AdvancedEntry Grid.Row="8"
 								 Grid.Column="1"
 								 Margin="5"
-								 Text="{Binding Transaction2.ReferenceNumber}" 
+								 Text="{Binding Transaction2.ReferenceNumber}"
 								 Object="{Binding Transaction2}"
-								 PropertyName="ReferenceNumber"/>
+								 PropertyName="ReferenceNumber" />
 
 
 			<Button Grid.Row="9"

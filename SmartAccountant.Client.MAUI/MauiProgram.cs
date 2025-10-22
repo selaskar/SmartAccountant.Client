@@ -14,7 +14,7 @@ using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace SmartAccountant.Client.MAUI;
 
-public static class MauiProgram
+internal static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {

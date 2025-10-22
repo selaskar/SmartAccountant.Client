@@ -6,7 +6,7 @@ using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.ApiClient.Options;
 using SmartAccountant.ApiClient.Resources;
 using SmartAccountant.Client.Core.Abstract;
-using SmartAccountant.Models;
+using SmartAccountant.Dtos;
 
 namespace SmartAccountant.ApiClient;
 

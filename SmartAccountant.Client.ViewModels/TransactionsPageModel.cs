@@ -17,7 +17,8 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
     {
         accountId = (Guid)query[AccountIdKey];
 
-        _ = FetchTransactions(CancellationToken.None);
+        if (Transactions == null)
+            _ = FetchTransactions(CancellationToken.None);
     }
 
     [ObservableProperty]
@@ -42,22 +43,5 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
         {
             IsBusy = false;
         }
-    }
-
-
-    [NotifyCanExecuteChangedFor(nameof(RefreshCommand))]
-    [ObservableProperty]
-    //For refresh view's busy indicator to show during load, we set this true beforehand.
-    public override partial bool IsBusy { get; set; } = true;
-
-    private bool CanRefresh => !IsBusy;
-
-    [RelayCommand(CanExecute = nameof(CanRefresh))]
-    private void Refresh()
-    {
-        //Since changing of the value of IsRefreshing property is enough to trigger the command of RefreshView,
-        //we only do that here. 
-        //Otherwise, command runs twice.
-        IsBusy = true;
     }
 }
