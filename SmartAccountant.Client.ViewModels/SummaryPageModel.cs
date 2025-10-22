@@ -4,7 +4,6 @@ using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
-using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.ViewModels;
 

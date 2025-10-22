@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Principal;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SmartAccountant.Client.Models.Resources;
 using SmartAccountant.Shared.Structs;

@@ -1,5 +1,5 @@
+using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels;
-using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.MAUI.Pages;
 

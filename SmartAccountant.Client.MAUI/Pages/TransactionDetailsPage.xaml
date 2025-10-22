@@ -6,7 +6,7 @@
 			 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
 			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
-			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
+			 xmlns:enums="clr-namespace:SmartAccountant.Shared.Enums;assembly=SmartAccountant.Shared"
 			 xmlns:resx="clr-namespace:SmartAccountant.Client.MAUI.Resources.Text"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
 			 x:DataType="viewModels:TransactionDetailsPageModel"
@@ -101,7 +101,7 @@
 							ItemsSource="{Binding MainCategories}"
 							SelectedItem="{Binding SelectedMainCategory}">
 				<CollectionView.ItemTemplate>
-					<DataTemplate x:DataType="models:MainCategory">
+					<DataTemplate x:DataType="enums:MainCategory">
 						<Grid Padding="0,2">
 							<Grid.Resources>
 								<converters:EnumBooleanConverter x:Key="convEnumBool"
@@ -145,16 +145,16 @@
 								  Grid.Column="1"
 								  Margin="5"
 								  HeightRequest="150"
-								  Text="{Binding Transaction2.PersonalNote}"
-								  Object="{Binding Transaction2}"
+								  Text="{Binding Transaction.PersonalNote}"
+								  Object="{Binding Transaction}"
 								  PropertyName="PersonalNote" />
 
 
 			<nihil:AdvancedEntry Grid.Row="8"
 								 Grid.Column="1"
 								 Margin="5"
-								 Text="{Binding Transaction2.ReferenceNumber}"
-								 Object="{Binding Transaction2}"
+								 Text="{Binding Transaction.ReferenceNumber}"
+								 Object="{Binding Transaction}"
 								 PropertyName="ReferenceNumber" />
 
 

@@ -1,12 +1,13 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using AutoMapper;
 using Microsoft.Extensions.Options;
 using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.ApiClient.Options;
 using SmartAccountant.ApiClient.Resources;
 using SmartAccountant.Client.Core.Abstract;
-using SmartAccountant.Dtos;
+using SmartAccountant.Client.Models;
 
 namespace SmartAccountant.ApiClient;
 
@@ -15,7 +16,8 @@ internal class CoreServiceClient(
     IOptions<CoreServiceOptions> options,
     ICurrentUser currentUser,
     IDateTimeService dateTimeService,
-    IAuthenticationService authenticationService)
+    IAuthenticationService authenticationService,
+    IMapper mapper)
     : ICoreServiceClient, IDisposable
 {
     /// <inheritdoc/>
@@ -24,9 +26,9 @@ internal class CoreServiceClient(
         try
         {
             var client = await GetHttpClient(cancellationToken);
-            var accounts = await client.GetFromJsonAsync<IEnumerable<Account>>("/api/accounts", cancellationToken);
+            var accounts = await client.GetFromJsonAsync<IEnumerable<Dtos.Account>>("/api/accounts", cancellationToken);
 
-            return accounts ?? [];
+            return (accounts ?? []).Select(mapper.Map<Dtos.Account, Account>);
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
         {
@@ -40,9 +42,9 @@ internal class CoreServiceClient(
         try
         {
             var client = await GetHttpClient(cancellationToken);
-            var transactions = await client.GetFromJsonAsync<IEnumerable<Transaction>>($"/api/transactions?accountId={accountId}", cancellationToken);
+            var transactions = await client.GetFromJsonAsync<IEnumerable<Dtos.Transaction>>($"/api/transactions?accountId={accountId}", cancellationToken);
 
-            return transactions ?? [];
+            return (transactions ?? []).Select(mapper.Map<Dtos.Transaction, Transaction>);
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
         {
@@ -56,10 +58,10 @@ internal class CoreServiceClient(
         try
         {
             var client = await GetHttpClient(cancellationToken);
-            var summary = await client.GetFromJsonAsync<MonthlySummary>($"/api/summary?month={month:yyyy-MM-dd}", cancellationToken)
+            var summary = await client.GetFromJsonAsync<Dtos.MonthlySummary>($"/api/summary?month={month:yyyy-MM-dd}", cancellationToken)
                 ?? throw new CoreServiceException("Monthly summary was unexpectedly null.");
 
-            return summary;
+            return mapper.Map<Dtos.MonthlySummary, MonthlySummary>(summary);
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
         {

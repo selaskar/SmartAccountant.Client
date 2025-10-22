@@ -1,5 +1,5 @@
 using SmartAccountant.ApiClient.Exceptions;
-using SmartAccountant.Dtos;
+using SmartAccountant.Client.Models;
 
 namespace SmartAccountant.ApiClient.Abstract;
 

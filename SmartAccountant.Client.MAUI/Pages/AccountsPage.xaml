@@ -3,7 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
-			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
+			 xmlns:models="clr-namespace:SmartAccountant.Client.Models;assembly=SmartAccountant.Client.Models"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.AccountsPage"
 			 x:DataType="viewModels:AccountsPageModel"

@@ -3,8 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Client.Core.Extensions;
+using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
-using SmartAccountant.Dtos;
 
 namespace SmartAccountant.Client.ViewModels;
 

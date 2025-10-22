@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.ApiClient.Infrastructure;
+using SmartAccountant.ApiClient.Mappers;
 using SmartAccountant.ApiClient.Options;
 
 namespace SmartAccountant.ApiClient.Extensions;
@@ -19,6 +20,8 @@ public static class ServiceCollectionExtensions
                 .ConfigurePrimaryHttpMessageHandler<DangerousHttpClientHandler>();
 
         services.AddTransient<ICoreServiceClient, CoreServiceClient>();
+
+        services.AddAutoMapper((cfg) => cfg.AddProfile<DtoToModelMappings>());
 
         return services;
     }

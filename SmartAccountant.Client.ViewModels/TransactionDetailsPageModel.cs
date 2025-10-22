@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Shared.Enums;
 using SmartAccountant.Shared.Structs;
-using Transaction = SmartAccountant.Client.Models.Transaction;
 
 namespace SmartAccountant.Client.ViewModels;
 
@@ -58,8 +57,8 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
     [ObservableProperty]
     public partial TimeOnly Time { get; set; }
 
-    [ObservableProperty]
-    [Range(typeof(TimeSpan), "-14:00:00", "14:00:00")]
+    [ObservableProperty, NotifyDataErrorInfo]
+    [Range(typeof(TimeSpan), "-14:00:00", "14:00:00")] //TODO: check
     public partial TimeSpan Offset { get; set; }
 
     public ReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
@@ -90,6 +89,7 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
 
     [ObservableProperty]
     public partial short SelectedSubCategory { get; set; } = -1;
+
 
     [RelayCommand(CanExecute = nameof(CanSave))]
     private async Task Save()
