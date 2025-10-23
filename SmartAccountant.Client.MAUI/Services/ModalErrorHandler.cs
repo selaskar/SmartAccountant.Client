@@ -5,7 +5,7 @@ namespace SmartAccountant.Client.MAUI.Services;
 /// <summary>
 /// Modal Error Handler.
 /// </summary>
-public class ModalErrorHandler : IErrorHandler
+internal sealed partial class ModalErrorHandler : IErrorHandler, IDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);
 
@@ -30,5 +30,10 @@ public class ModalErrorHandler : IErrorHandler
         {
             _semaphore.Release();
         }
+    }
+
+    public void Dispose()
+    {
+        ((IDisposable)_semaphore).Dispose();
     }
 }

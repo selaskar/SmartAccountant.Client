@@ -4,6 +4,7 @@ using MAUI.MSALClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SmartAccountant.ApiClient.Extensions;
+using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Client.MAUI.Pages;
 using SmartAccountant.Client.MAUI.Services;
 using SmartAccountant.Client.ViewModels.Extensions;
@@ -43,6 +44,7 @@ internal static class MauiProgram
         ConfigureAuthentication(appConfiguration);
 
         builder.Services.AddSingleton<IErrorHandler, ModalErrorHandler>();
+        builder.Services.AddSingleton<INavigationService, NavigationService>();
 
         builder.Services.RegisterViewModels();
 

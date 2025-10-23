@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SmartAccountant.Client.Models;
 
-public abstract class BaseModel : ObservableValidator, IEditableObject
+public abstract partial class BaseModel : ObservableValidator, IEditableObject
 {
     [Editable(false)]
     public Guid Id { get; set; }
@@ -14,8 +14,9 @@ public abstract class BaseModel : ObservableValidator, IEditableObject
     #region IEditableObject
     private BaseModel? _backup;
 
+    [ObservableProperty]
     [MemberNotNullWhen(true, nameof(_backup))]
-    public bool IsEditing { get; private set; }
+    public partial bool IsEditing { get; private set; }
 
     /// <exception cref="InvalidOperationException"/>
     public void BeginEdit()

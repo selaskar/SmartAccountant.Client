@@ -108,10 +108,6 @@ internal class CoreServiceClient(
             await authenticationService.SignIn(cancellationToken);
         }
 
-        string? token = currentUser.AccessToken;
-
-        httpClient.DefaultRequestHeaders.Authorization = token != null
-            ? new AuthenticationHeaderValue("Bearer", token)
-            : null;
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", currentUser.AccessToken);
     }
 }

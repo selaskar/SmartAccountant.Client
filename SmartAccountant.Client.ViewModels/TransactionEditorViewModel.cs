@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Shared.Enums;
 using SmartAccountant.Shared.Structs;

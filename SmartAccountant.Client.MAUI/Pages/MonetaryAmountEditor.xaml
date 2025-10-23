@@ -16,7 +16,8 @@
 				MinimumWidthRequest="90"
 				x:Name="currencyPicker"
 				ItemsSource="{Binding Currencies, Source={x:Reference @this}, x:DataType=pages:MonetaryAmountEditor}"
-				ItemDisplayBinding="{Binding .}"/>
+				ItemDisplayBinding="{Binding .}"
+				SelectedIndexChanged="currencyPicker_SelectedIndexChanged"/>
 		
 		<Entry Grid.Column="1"
 			   Margin="5"

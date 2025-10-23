@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Client.Models;
 
 namespace SmartAccountant.Client.ViewModels;
 
-public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttributable
+public partial class TransactionDetailsPageModel(INavigationService navigationService) : ViewModelBase, IQueryAttributable
 {
     public const string TransactionObjectKey = "Transaction";
 
@@ -37,9 +38,23 @@ public partial class TransactionDetailsPageModel : ViewModelBase, IQueryAttribut
     [RelayCommand(CanExecute = nameof(CanSave))]
     private async Task Save()
     {
-
         Transaction!.EndEdit();
+
+        navigationService.NavigateBack();
     }
 
     private bool CanSave() => !Transaction?.HasErrors ?? false;
+
+
+    [RelayCommand]
+    private void Cancel()
+    {
+        if (Transaction?.IsEditing == true)
+        {
+            //TODO: ask before cancelling.
+            Transaction?.CancelEdit();
+        }
+
+        navigationService.NavigateBack();
+    }
 }

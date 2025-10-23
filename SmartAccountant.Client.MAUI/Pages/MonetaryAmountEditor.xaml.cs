@@ -52,4 +52,13 @@ public partial class MonetaryAmountEditor : ContentView
 
         Amount = new MonetaryValue(amount, Amount.Currency);
     }
+
+
+    private void currencyPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (currencyPicker.SelectedIndex == -1)
+            return;
+
+        Amount = new MonetaryValue(Amount.Amount, (Currency)currencyPicker.SelectedItem);
+    }
 }

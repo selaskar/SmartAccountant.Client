@@ -11,11 +11,15 @@
 			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionDetailsPage"
 			 x:DataType="viewModels:TransactionDetailsPageModel"
 			 Title="Transaction Details">
+	<Shell.BackButtonBehavior>
+		<BackButtonBehavior Command="{Binding CancelCommand}" />
+	</Shell.BackButtonBehavior>
 
 	<ScrollView HorizontalOptions="Start"
 				MaximumWidthRequest="400">
 		<Grid Margin="15,5">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
@@ -25,14 +29,23 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Since the view assigns itself a view model, this binding needs to use relative source. -->
-			<pages:TransactionEditor Grid.Row="0" Grid.ColumnSpan="2"
+			<pages:TransactionEditor Grid.Row="0"
+									 Grid.ColumnSpan="2"
 									 Transaction="{Binding Transaction, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewModels:TransactionDetailsPageModel}}}" />
 
-			<Button Grid.Row="2"
+
+			<Button Grid.Row="1"
 					Grid.Column="1"
 					Margin="5"
 					Text="Save"
 					Command="{Binding SaveCommand}" />
+
+
+			<Button Grid.Row="2"
+					Grid.Column="1"
+					Margin="5"
+					Text="Cancel"
+					Command="{Binding CancelCommand}" />
 		</Grid>
 	</ScrollView>
 </ContentPage>
