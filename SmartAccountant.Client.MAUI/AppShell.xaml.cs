@@ -21,9 +21,4 @@ public partial class AppShell : Shell
         if (args.CanCancel && currentUser.IsAuthenticated != true)
             args.Cancel();
     }
-
-    protected override bool OnBackButtonPressed()
-    {
-        return base.OnBackButtonPressed();
-    }
 }

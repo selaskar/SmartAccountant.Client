@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using CommunityToolkit.Mvvm.ComponentModel;
+using SmartAccountant.Client.Core.Attributes;
 using SmartAccountant.Client.Models.Resources;
 using SmartAccountant.Shared;
 using SmartAccountant.Shared.Structs;
@@ -14,25 +15,26 @@ public partial class Transaction : BaseModel
     public Account? Account { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(100, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
-    [Display(Name = nameof(Strings.Transaction_ReferenceNumber), Description = nameof(Strings.Transaction_ReferenceNumber_Description), ResourceType = typeof(Strings))]
+    [StringLength(100, ErrorMessageResourceName = nameof(CommonStrings.Max_Length_Error), ErrorMessageResourceType = typeof(CommonStrings))]
+    [Display(Name = nameof(ModelStrings.Transaction_ReferenceNumber), Description = nameof(ModelStrings.Transaction_ReferenceNumber_Description), ResourceType = typeof(ModelStrings))]
     public partial string? ReferenceNumber { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
     [Range(typeof(DateTimeOffset), ApplicationDefinitions.EpochStartString, ApplicationDefinitions.EpochEndString)]
     public partial DateTimeOffset Timestamp { get; set; }
 
-    [ObservableProperty]
-    //TODO: maximum and minimum value validation with custom attribute
+    [ObservableProperty, NotifyDataErrorInfo]
+    [MonetaryValue(-999999999999.9999, 999999999999.9999, ErrorMessageResourceName = nameof(CommonStrings.Min_Max_Value_Error), ErrorMessageResourceType = typeof(CommonStrings))]
+    [Display(Name = nameof(ModelStrings.Transaction_Amount), ResourceType = typeof(ModelStrings))]
     public partial MonetaryValue Amount { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(500, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
-    [Display(Name = nameof(Strings.Transaction_PersonalNote), ResourceType = typeof(Strings))]
+    [StringLength(500, ErrorMessageResourceName = nameof(CommonStrings.Max_Length_Error), ErrorMessageResourceType = typeof(CommonStrings))]
+    [Display(Name = nameof(ModelStrings.Transaction_PersonalNote), ResourceType = typeof(ModelStrings))]
     public partial string? PersonalNote { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [StringLength(500, ErrorMessageResourceName = nameof(Strings.Max_Length_Error), ErrorMessageResourceType = typeof(Strings))]
+    [StringLength(500, ErrorMessageResourceName = nameof(CommonStrings.Max_Length_Error), ErrorMessageResourceType = typeof(CommonStrings))]
     public partial string? Description { get; set; }
 
     [ObservableProperty]

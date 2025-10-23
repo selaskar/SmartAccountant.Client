@@ -31,8 +31,8 @@
 										<RowDefinition Height="25" />
 									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="9*" />
-										<ColumnDefinition Width="5*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
 
 									<RoundRectangle Grid.RowSpan="2"
@@ -50,6 +50,7 @@
 										   Grid.Row="0"
 										   Grid.Column="1"
 										   HorizontalTextAlignment="End"
+										   LineBreakMode="NoWrap"
 										   Text="{Binding Amount, Converter={StaticResource convMonetaryValue}}" />
 
 									<Label Margin="5"

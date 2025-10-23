@@ -22,24 +22,24 @@ namespace SmartAccountant.Client.Models.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Strings {
+    internal class CommonStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal CommonStrings() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartAccountant.Client.Models.Resources.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartAccountant.Client.Models.Resources.CommonStrings", typeof(CommonStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace SmartAccountant.Client.Models.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,36 +63,18 @@ namespace SmartAccountant.Client.Models.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} cannot be longer than {1} chars..
         /// </summary>
-        public static string Max_Length_Error {
+        internal static string Max_Length_Error {
             get {
                 return ResourceManager.GetString("Max_Length_Error", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Note.
+        ///   Looks up a localized string similar to {0} must be between {1} and {2}..
         /// </summary>
-        public static string Transaction_PersonalNote {
+        internal static string Min_Max_Value_Error {
             get {
-                return ResourceManager.GetString("Transaction_PersonalNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference Number.
-        /// </summary>
-        public static string Transaction_ReferenceNumber {
-            get {
-                return ResourceManager.GetString("Transaction_ReferenceNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assigned by the bank.
-        /// </summary>
-        public static string Transaction_ReferenceNumber_Description {
-            get {
-                return ResourceManager.GetString("Transaction_ReferenceNumber_Description", resourceCulture);
+                return ResourceManager.GetString("Min_Max_Value_Error", resourceCulture);
             }
         }
     }

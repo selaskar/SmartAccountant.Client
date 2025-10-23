@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Transaction_PersonalNote" xml:space="preserve">
-    <value>Personal Note</value>
-  </data>
-  <data name="Transaction_ReferenceNumber" xml:space="preserve">
-    <value>Reference Number</value>
-  </data>
-  <data name="Transaction_ReferenceNumber_Description" xml:space="preserve">
-    <value>Assigned by the bank</value>
-  </data>
   <data name="Max_Length_Error" xml:space="preserve">
     <value>{0} cannot be longer than {1} chars.</value>
+  </data>
+  <data name="Min_Max_Value_Error" xml:space="preserve">
+    <value>{0} must be between {1} and {2}.</value>
   </data>
 </root>

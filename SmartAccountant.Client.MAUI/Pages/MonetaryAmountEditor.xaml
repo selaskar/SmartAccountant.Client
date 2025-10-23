@@ -23,7 +23,7 @@
 			   Margin="5"
 			   HorizontalOptions="Fill"
 			   Keyboard="Numeric"
-			   MaxLength="16"
+			   MaxLength="20"
 			   x:Name="txtAmount">
 			<Entry.Resources>
 				<Style x:Key="InvalidEntryStyle"
@@ -38,6 +38,7 @@
 				</Style>
 			</Entry.Resources>
 			<Entry.Behaviors>
+				<!-- Get min/max values from validation attrib. -->
 				<toolkit:NumericValidationBehavior Flags="ValidateOnValueChanged"
 												   MinimumValue="-999999999999.9999"
 												   MaximumValue="999999999999.9999"
