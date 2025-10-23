@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Client.Models;
 
 namespace SmartAccountant.Client.ViewModels;
 
-public partial class TransactionDetailsPageModel(INavigationService navigationService) : ViewModelBase, IQueryAttributable
+public partial class DebitTransactionDetailsPageModel(INavigationService navigationService, ICoreServiceClient coreServiceClient) : ViewModelBase, IQueryAttributable
 {
     public const string TransactionObjectKey = "Transaction";
 
@@ -15,15 +16,15 @@ public partial class TransactionDetailsPageModel(INavigationService navigationSe
     {
         ArgumentNullException.ThrowIfNull(query);
 
-        Transaction = (Transaction)query[TransactionObjectKey];
+        Transaction = (DebitTransaction)query[TransactionObjectKey];
 
         Transaction.BeginEdit();
     }
 
     [ObservableProperty]
-    public partial Transaction? Transaction { get; set; }
+    public partial DebitTransaction? Transaction { get; set; }
 
-    partial void OnTransactionChanged(Transaction? oldValue, Transaction? newValue)
+    partial void OnTransactionChanged(DebitTransaction? oldValue, DebitTransaction? newValue)
     {
         oldValue?.ErrorsChanged -= Transaction_ErrorsChanged;
         newValue?.ErrorsChanged += Transaction_ErrorsChanged;
@@ -36,9 +37,11 @@ public partial class TransactionDetailsPageModel(INavigationService navigationSe
 
 
     [RelayCommand(CanExecute = nameof(CanSave))]
-    private async Task Save()
+    private async Task Save(CancellationToken cancellationToken)
     {
         Transaction!.EndEdit();
+
+        await coreServiceClient.UpdateDebitTransactionAsync(Transaction, cancellationToken);
 
         navigationService.NavigateBack();
     }

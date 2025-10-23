@@ -77,5 +77,14 @@ namespace SmartAccountant.Client.Models.Resources {
                 return ResourceManager.GetString("Min_Max_Value_Error", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is required..
+        /// </summary>
+        internal static string Required_Field_Missing {
+            get {
+                return ResourceManager.GetString("Required_Field_Missing", resourceCulture);
+            }
+        }
     }
 }

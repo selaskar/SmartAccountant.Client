@@ -12,6 +12,16 @@ public partial class TransactionEditor : ContentView
         BindingContext = new TransactionEditorViewModel();
     }
 
+    public double LabelColumnWidth
+    {
+        get;
+        set
+        {
+            field = value;
+            labelColumn.Width = new GridLength(value, GridUnitType.Absolute);
+        }
+    }
+
     public static readonly BindableProperty TransactionProperty = BindableProperty.Create(nameof(Transaction), typeof(Transaction), typeof(TransactionEditor),
         defaultValue: null,
         defaultBindingMode: BindingMode.OneWay,

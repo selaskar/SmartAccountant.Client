@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:shared="clr-namespace:SmartAccountant.Shared;assembly=SmartAccountant.Shared"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.MonetaryAmountEditor"
 			 x:Name="@this">
@@ -38,10 +39,9 @@
 				</Style>
 			</Entry.Resources>
 			<Entry.Behaviors>
-				<!-- Get min/max values from validation attrib. -->
 				<toolkit:NumericValidationBehavior Flags="ValidateOnValueChanged"
-												   MinimumValue="-999999999999.9999"
-												   MaximumValue="999999999999.9999"
+												   MinimumValue="{x:Static shared:ApplicationDefinitions.MinTransactionAmount}"
+												   MaximumValue="{x:Static shared:ApplicationDefinitions.MaxTransactionAmount}"
 												   MaximumDecimalPlaces="2"
 												   InvalidStyle="{StaticResource InvalidEntryStyle}"
 												   ValidStyle="{StaticResource ValidEntryStyle}" />

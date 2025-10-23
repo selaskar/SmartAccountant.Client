@@ -16,4 +16,8 @@ public interface ICoreServiceClient
     /// <exception cref="CoreServiceException"/>
     /// <exception cref="OperationCanceledException"/>
     Task<MonthlySummary> GetMonthlySummary(DateOnly month, CancellationToken cancellationToken);
+
+    /// <exception cref="CoreServiceException"/>
+    /// <exception cref="OperationCanceledException"/>
+    Task UpdateDebitTransactionAsync(DebitTransaction transaction, CancellationToken cancellationToken);
 }

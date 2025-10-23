@@ -20,7 +20,7 @@ public partial class TransactionsPage : ContentPage
         // See comments about ShellNavigationQueryParameters in AccountsPage.ListView_ItemTapped.
         var navigationParameter = new ShellNavigationQueryParameters
         {
-            { TransactionDetailsPageModel.TransactionObjectKey, transaction }
+            { DebitTransactionDetailsPageModel.TransactionObjectKey, transaction }
         };
         await Shell.Current.GoToAsync("/details", navigationParameter);
     }

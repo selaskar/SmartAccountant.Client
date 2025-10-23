@@ -25,7 +25,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<!-- Take width as parameter -->
-			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition x:Name="labelColumn" Width="Auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
@@ -42,7 +42,7 @@
 			   Grid.Column="0"
 			   Margin="5"
 			   VerticalTextAlignment="Center"
-			   Text="{x:Static resx:Labels.TransactionDetailsPage_Amount_Label}" />
+			   Text="{x:Static resx:Labels.TransactionEditor_Amount_Label}" />
 		<pages:MonetaryAmountEditor Grid.Row="1"
 									Grid.Column="1"
 									Amount="{Binding Transaction.Amount}" />
@@ -52,7 +52,7 @@
 			   Grid.Column="0"
 			   Margin="5"
 			   VerticalTextAlignment="Center"
-			   Text="{x:Static resx:Labels.TransactionDetailsPage_Date_Label}" />
+			   Text="{x:Static resx:Labels.TransactionEditor_Date_Label}" />
 		<!-- TODO: read min/max dates from attribute. -->
 		<DatePicker Grid.Row="2"
 					Grid.Column="1"
@@ -66,7 +66,7 @@
 			   Grid.Column="0"
 			   Margin="5"
 			   VerticalTextAlignment="Center"
-			   Text="{x:Static resx:Labels.TransactionDetailsPage_Time_Label}" />
+			   Text="{x:Static resx:Labels.TransactionEditor_Time_Label}" />
 		<!-- Has uneven margin to justify the label to center. -->
 		<TimePicker Grid.Row="3"
 					Grid.Column="1"
@@ -78,7 +78,7 @@
 			   Grid.Column="0"
 			   Margin="5"
 			   VerticalTextAlignment="Center"
-			   Text="{x:Static resx:Labels.TransactionDetailsPage_TimeZone_Label}" />
+			   Text="{x:Static resx:Labels.TransactionEditor_TimeZone_Label}" />
 		<Picker Grid.Row="4"
 				Grid.Column="1"
 				Margin="5"
@@ -91,7 +91,7 @@
 			   Grid.Column="0"
 			   Margin="5"
 			   VerticalTextAlignment="Center"
-			   Text="{x:Static resx:Labels.TransactionDetailsPage_Category_Label}" />
+			   Text="{x:Static resx:Labels.TransactionEditor_Category_Label}" />
 		<CollectionView Grid.Row="5"
 						Grid.Column="1"
 						Margin="5"
@@ -134,7 +134,7 @@
 							 Margin="5"
 							 HeightRequest="60"
 							 IsEditable="True"
-							 Placeholder="{x:Static resx:Labels.TransactionDetailsPage_SubCategory_Placeholder}"
+							 Placeholder="{x:Static resx:Labels.TransactionEditor_SubCategory_Placeholder}"
 							 IsVisible="{Binding ExpenseCategorySelected}"
 							 DisplayMemberPath="DisplayName"
 							 ItemsSource="{Binding ExpenseSubCategories}"

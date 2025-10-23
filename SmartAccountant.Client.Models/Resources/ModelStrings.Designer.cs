@@ -61,6 +61,15 @@ namespace SmartAccountant.Client.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remaining Amount.
+        /// </summary>
+        public static string DebitTransaction_RemainingAmount {
+            get {
+                return ResourceManager.GetString("DebitTransaction_RemainingAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
         public static string Transaction_Amount {

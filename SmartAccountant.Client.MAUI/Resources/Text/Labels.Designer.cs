@@ -61,56 +61,65 @@ namespace SmartAccountant.Client.MAUI.Resources.Text {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remaining.
+        /// </summary>
+        public static string DebitTransactionDetailsPage_RemainingBalance_Label {
+            get {
+                return ResourceManager.GetString("DebitTransactionDetailsPage_RemainingBalance_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
-        public static string TransactionDetailsPage_Amount_Label {
+        public static string TransactionEditor_Amount_Label {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_Amount_Label", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_Amount_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
-        public static string TransactionDetailsPage_Category_Label {
+        public static string TransactionEditor_Category_Label {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_Category_Label", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_Category_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
-        public static string TransactionDetailsPage_Date_Label {
+        public static string TransactionEditor_Date_Label {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_Date_Label", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_Date_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select a sub-category.
         /// </summary>
-        public static string TransactionDetailsPage_SubCategory_Placeholder {
+        public static string TransactionEditor_SubCategory_Placeholder {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_SubCategory_Placeholder", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_SubCategory_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
-        public static string TransactionDetailsPage_Time_Label {
+        public static string TransactionEditor_Time_Label {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_Time_Label", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_Time_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Time Zone.
         /// </summary>
-        public static string TransactionDetailsPage_TimeZone_Label {
+        public static string TransactionEditor_TimeZone_Label {
             get {
-                return ResourceManager.GetString("TransactionDetailsPage_TimeZone_Label", resourceCulture);
+                return ResourceManager.GetString("TransactionEditor_TimeZone_Label", resourceCulture);
             }
         }
     }

@@ -88,7 +88,7 @@
 	  <MauiXaml Update="Pages\SummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\TransactionDetailsPage.xaml">
+	  <MauiXaml Update="Pages\DebitTransactionDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\TransactionEditor.xaml">
@@ -109,6 +109,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\DebitTransactionDetailsPage.xaml.cs">
+	    <DependentUpon>DebitTransactionDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\TransactionsPage.xaml.cs">
 	    <DependentUpon>TransactionsPage.xaml</DependentUpon>
 	  </Compile>

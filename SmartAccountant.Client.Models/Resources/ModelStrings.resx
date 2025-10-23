@@ -129,4 +129,7 @@
   <data name="Transaction_Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="DebitTransaction_RemainingAmount" xml:space="preserve">
+    <value>Remaining Amount</value>
+  </data>
 </root>

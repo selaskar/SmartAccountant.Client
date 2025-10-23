@@ -2,9 +2,9 @@ using SmartAccountant.Client.ViewModels;
 
 namespace SmartAccountant.Client.MAUI.Pages;
 
-public partial class TransactionDetailsPage : ContentPage
+public partial class DebitTransactionDetailsPage : ContentPage
 {
-	public TransactionDetailsPage(TransactionDetailsPageModel viewModel)
+	public DebitTransactionDetailsPage(DebitTransactionDetailsPageModel viewModel)
 	{
 		InitializeComponent();
 

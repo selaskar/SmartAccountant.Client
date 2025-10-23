@@ -24,7 +24,7 @@ public partial class Transaction : BaseModel
     public partial DateTimeOffset Timestamp { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
-    [MonetaryValue(-999999999999.9999, 999999999999.9999, ErrorMessageResourceName = nameof(CommonStrings.Min_Max_Value_Error), ErrorMessageResourceType = typeof(CommonStrings))]
+    [MonetaryValue(ApplicationDefinitions.MinTransactionAmount, ApplicationDefinitions.MaxTransactionAmount, ErrorMessageResourceName = nameof(CommonStrings.Min_Max_Value_Error), ErrorMessageResourceType = typeof(CommonStrings))]
     [Display(Name = nameof(ModelStrings.Transaction_Amount), ResourceType = typeof(ModelStrings))]
     public partial MonetaryValue Amount { get; set; }
 
@@ -34,8 +34,9 @@ public partial class Transaction : BaseModel
     public partial string? PersonalNote { get; set; }
 
     [ObservableProperty, NotifyDataErrorInfo]
+    [Required(ErrorMessageResourceName = nameof(CommonStrings.Required_Field_Missing), ErrorMessageResourceType = typeof(CommonStrings))]
     [StringLength(500, ErrorMessageResourceName = nameof(CommonStrings.Max_Length_Error), ErrorMessageResourceType = typeof(CommonStrings))]
-    public partial string? Description { get; set; }
+    public partial string Description { get; set; }
 
     [ObservableProperty]
     public partial TransactionCategory Category { get; set; }

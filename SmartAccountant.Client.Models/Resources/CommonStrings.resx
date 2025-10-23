@@ -123,4 +123,7 @@
   <data name="Min_Max_Value_Error" xml:space="preserve">
     <value>{0} must be between {1} and {2}.</value>
   </data>
+  <data name="Required_Field_Missing" xml:space="preserve">
+    <value>{0} is required.</value>
+  </data>
 </root>

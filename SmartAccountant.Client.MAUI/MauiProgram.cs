@@ -69,7 +69,7 @@ internal static class MauiProgram
     private static void RegisterRoutes()
     {
         Routing.RegisterRoute("//accounts/transactions", typeof(TransactionsPage));
-        Routing.RegisterRoute("//accounts/transactions/details", typeof(TransactionDetailsPage));
+        Routing.RegisterRoute("//accounts/transactions/details", typeof(DebitTransactionDetailsPage));
     }
 
     private static IConfiguration GetConfig()

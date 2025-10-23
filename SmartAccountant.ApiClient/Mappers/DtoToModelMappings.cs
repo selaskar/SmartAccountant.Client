@@ -34,7 +34,7 @@ internal sealed class DtoToModelMappings : Profile
 
         CreateMap<Dtos.Transaction, Client.Models.Transaction>()
             .IncludeBase<Dtos.BaseDto, Client.Models.BaseModel>()
-            .ForMember(x => x.AccountId, opt => opt.MapFrom(e => e.AccountId!.Value))
+            .ForMember(x => x.AccountId, opt => opt.MapFrom(e => e.AccountId))
             .ForMember(x => x.Account, opt => opt.Ignore())
             .ForMember(x => x.ReferenceNumber, opt => opt.MapFrom(e => e.ReferenceNumber))
             .ForMember(x => x.Timestamp, opt => opt.MapFrom(e => e.Timestamp))
