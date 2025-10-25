@@ -44,7 +44,7 @@ public partial class SummaryPageModel : ViewModelBase
 
         try
         {
-            var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+            using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
 
             Summary = await _serviceClient.GetMonthlySummary(month, cts.Token);
         }
