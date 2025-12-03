@@ -4,7 +4,6 @@ using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
-using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.ViewModels;
 
@@ -45,9 +44,11 @@ public partial class SummaryPageModel : ViewModelBase
 
         try
         {
-            Summary = await _serviceClient.GetMonthlySummary(month);
+            using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+
+            Summary = await _serviceClient.GetMonthlySummary(month, cts.Token);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _errorHandler.HandleError(ex);
         }

@@ -9,4 +9,6 @@ public interface ICurrentUser
     Task<IAccount?> Account { get; }
 
     string? AccessToken { get; }
+
+    DateTimeOffset? ExpiresOn { get; }
 }

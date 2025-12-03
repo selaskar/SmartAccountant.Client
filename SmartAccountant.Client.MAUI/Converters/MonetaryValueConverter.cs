@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
-using SmartAccountant.Models;
+using SmartAccountant.Shared.Enums;
+using SmartAccountant.Shared.Structs;
 
 namespace SmartAccountant.Client.MAUI.Converters;
 

@@ -8,11 +8,14 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
         services.AddSingleton<ICurrentUser, CurrentUser>();
+        services.AddSingleton<IDateTimeService, DateTimeService>();
+        services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
-        services.AddTransient<SignInPageModel>();
         services.AddTransient<AccountsPageModel>();
-        services.AddTransient<TransactionsPageModel>();
+        services.AddTransient<SignInPageModel>();
         services.AddTransient<SummaryPageModel>();
+        services.AddTransient<DebitTransactionDetailsPageModel>();
+        services.AddTransient<TransactionsPageModel>();
 
         return services;
     }

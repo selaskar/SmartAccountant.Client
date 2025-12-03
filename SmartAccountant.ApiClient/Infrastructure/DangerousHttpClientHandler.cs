@@ -2,7 +2,7 @@
 
 namespace SmartAccountant.ApiClient.Infrastructure;
 
-internal partial class DangerousHttpClientHandler : HttpClientHandler
+internal sealed partial class DangerousHttpClientHandler : HttpClientHandler
 {
     /// <summary>
     /// Dismisses certificate-related errors of HTTPS in debug mode.

@@ -9,13 +9,15 @@ namespace SmartAccountant.Client.ViewModels;
 
 public partial class SignInPageModel : ViewModelBase
 {
-    private readonly IErrorHandler errorHandler;
-    private readonly ICurrentUser currentUser;
+    private readonly IErrorHandler _errorHandler;
+    private readonly ICurrentUser _currentUser;
+    private readonly IAuthenticationService _authenticationService;
 
-    public SignInPageModel(IErrorHandler errorHandler, ICurrentUser currentUser)
+    public SignInPageModel(IErrorHandler errorHandler, ICurrentUser currentUser, IAuthenticationService authenticationService)
     {
-        this.errorHandler = errorHandler;
-        this.currentUser = currentUser;
+        _errorHandler = errorHandler;
+        _currentUser = currentUser;
+        _authenticationService = authenticationService;
 
         _ = Initialize();
     }
@@ -31,15 +33,19 @@ public partial class SignInPageModel : ViewModelBase
 
         try
         {
-            Username = (await currentUser.Account)?.GetDisplayName();
+            Username = (await _currentUser.Account)?.GetDisplayName();
 
             // If there is sign-in info, silently fetch access token.
             if (Username != null)
-                await SignIn();
+            {
+                var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+
+                await SignIn(cts.Token);
+            }
         }
         catch (Exception ex)
         {
-            errorHandler.HandleError(ex);
+            _errorHandler.HandleError(ex);
         }
         finally
         {
@@ -49,21 +55,20 @@ public partial class SignInPageModel : ViewModelBase
 
     private bool CanSignIn() => string.IsNullOrEmpty(Username);
 
-    [RelayCommand(CanExecute = nameof(CanSignIn))]
-    private async Task SignIn()
+    [RelayCommand(CanExecute = nameof(CanSignIn), IncludeCancelCommand = true)]
+    private async Task SignIn(CancellationToken cancellationToken)
     {
         IsBusy = true;
 
         try
         {
-            var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
-
-            await PublicClientSingleton.Instance.AcquireTokenSilentAsync(cts.Token);
-            Username = (await currentUser.Account)?.GetDisplayName();
+            await _authenticationService.SignIn(cancellationToken);
+            Username = (await _currentUser.Account)?.GetDisplayName();
         }
+        catch (OperationCanceledException) { }
         catch (Exception ex)
         {
-            errorHandler.HandleError(ex);
+            _errorHandler.HandleError(ex);
         }
         finally
         {
@@ -79,12 +84,13 @@ public partial class SignInPageModel : ViewModelBase
         IsBusy = true;
         try
         {
-            await PublicClientSingleton.Instance.SignOutAsync();
+            await _authenticationService.SignOut();
+
             Username = null;
         }
         catch (Exception ex)
         {
-            errorHandler.HandleError(ex);
+            _errorHandler.HandleError(ex);
         }
         finally
         {

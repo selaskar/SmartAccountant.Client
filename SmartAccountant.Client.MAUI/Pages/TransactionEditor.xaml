@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:sfInputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"			 
+			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
+			 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
+			 xmlns:enums="clr-namespace:SmartAccountant.Shared.Enums;assembly=SmartAccountant.Shared"
+			 xmlns:converters="clr-namespace:SmartAccountant.Client.MAUI.Converters"
+			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
+			 xmlns:resx="clr-namespace:SmartAccountant.Client.MAUI.Resources.Text"
+			 x:Class="SmartAccountant.Client.MAUI.Pages.TransactionEditor"
+			 x:DataType="viewModels:TransactionEditorViewModel">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<!-- Take width as parameter -->
+			<ColumnDefinition x:Name="labelColumn" Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Label Grid.Row="0"
+			   Grid.ColumnSpan="2"
+			   Margin="5"
+			   HorizontalOptions="Center"
+			   VerticalOptions="Center"
+			   FontAttributes="Bold"
+			   Text="{Binding Transaction.Description}" />
+
+
+		<Label Grid.Row="1"
+			   Grid.Column="0"
+			   Margin="5"
+			   VerticalTextAlignment="Center"
+			   Text="{x:Static resx:Labels.TransactionEditor_Amount_Label}" />
+		<pages:MonetaryAmountEditor Grid.Row="1"
+									Grid.Column="1"
+									Amount="{Binding Transaction.Amount}" />
+
+
+		<Label Grid.Row="2"
+			   Grid.Column="0"
+			   Margin="5"
+			   VerticalTextAlignment="Center"
+			   Text="{x:Static resx:Labels.TransactionEditor_Date_Label}" />
+		<!-- TODO: read min/max dates from attribute. -->
+		<DatePicker Grid.Row="2"
+					Grid.Column="1"
+					Margin="5"
+					MinimumDate="2000-01-01"
+					MaximumDate="2050-01-01"
+					Date="{Binding Date, Converter={StaticResource convDateOnly}}" />
+
+
+		<Label Grid.Row="3"
+			   Grid.Column="0"
+			   Margin="5"
+			   VerticalTextAlignment="Center"
+			   Text="{x:Static resx:Labels.TransactionEditor_Time_Label}" />
+		<!-- Has uneven margin to justify the label to center. -->
+		<TimePicker Grid.Row="3"
+					Grid.Column="1"
+					Margin="5,15,0,0"
+					Time="{Binding Time, Converter={StaticResource convTimeOnly}}" />
+
+
+		<Label Grid.Row="4"
+			   Grid.Column="0"
+			   Margin="5"
+			   VerticalTextAlignment="Center"
+			   Text="{x:Static resx:Labels.TransactionEditor_TimeZone_Label}" />
+		<Picker Grid.Row="4"
+				Grid.Column="1"
+				Margin="5"
+				ItemsSource="{Binding TimeZones, Mode=OneTime}"
+				ItemDisplayBinding="{Binding DisplayName}"
+				SelectedItem="{Binding SelectedTimeZone}" />
+
+
+		<Label Grid.Row="5"
+			   Grid.Column="0"
+			   Margin="5"
+			   VerticalTextAlignment="Center"
+			   Text="{x:Static resx:Labels.TransactionEditor_Category_Label}" />
+		<CollectionView Grid.Row="5"
+						Grid.Column="1"
+						Margin="5"
+						HorizontalOptions="Start"
+						WidthRequest="200"
+						SelectionMode="None"
+						ItemsSource="{Binding MainCategories}"
+						SelectedItem="{Binding SelectedMainCategory}">
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="enums:MainCategory">
+					<Grid Padding="0,2">
+						<Grid.Resources>
+							<converters:EnumBooleanConverter x:Key="convEnumBool"
+															 x:DataType="{x:Null}"
+															 BindingContext="{x:Reference radio}"
+															 Parameter="{Binding BindingContext}" />
+						</Grid.Resources>
+
+						<Border Opacity="0.5"
+								BackgroundColor="{Binding .,Converter={StaticResource convTransactionCategory}}" />
+
+						<!-- Without an explicit width, radio button doesn't expand horizontally. -->
+						<RadioButton WidthRequest="190"
+									 FontAttributes="Bold"
+									 HorizontalOptions="Fill"
+									 Margin="0,10,0,0"
+									 Opacity="1"
+									 x:Name="radio"
+									 GroupName="categories"
+									 Content="{Binding .,Converter={StaticResource convEnumDisplayName}}"
+									 IsChecked="{Binding SelectedMainCategory, Converter={StaticResource convEnumBool}, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewModels:TransactionEditorViewModel}}}" />
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+
+		<sfInputs:SfComboBox Grid.Row="6"
+							 Grid.Column="1"
+							 Margin="5"
+							 HeightRequest="60"
+							 IsEditable="True"
+							 Placeholder="{x:Static resx:Labels.TransactionEditor_SubCategory_Placeholder}"
+							 IsVisible="{Binding ExpenseCategorySelected}"
+							 DisplayMemberPath="DisplayName"
+							 ItemsSource="{Binding ExpenseSubCategories}"
+							 SelectedIndex="{Binding SelectedSubCategory, Mode=TwoWay}" />
+
+
+		<nihil:AdvancedEditor Grid.Row="7"
+							  Grid.Column="1"
+							  Margin="5"
+							  HeightRequest="150"
+							  Text="{Binding Transaction.PersonalNote}"
+							  Object="{Binding Transaction}"
+							  PropertyName="PersonalNote" />
+
+
+		<nihil:AdvancedEntry Grid.Row="8"
+							 Grid.Column="1"
+							 Margin="5"
+							 Text="{Binding Transaction.ReferenceNumber}"
+							 Object="{Binding Transaction}"
+							 PropertyName="ReferenceNumber" />
+	</Grid>
+</ContentView>

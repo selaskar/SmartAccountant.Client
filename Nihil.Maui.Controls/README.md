@@ -1,0 +1,1 @@
+﻿Requires Syncfusion Toolkit for MAUI initialization.

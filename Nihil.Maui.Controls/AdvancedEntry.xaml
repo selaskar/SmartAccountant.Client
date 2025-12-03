@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nihil:AdvancedEntryBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+						 xmlns:nihil="clr-namespace:Nihil.Maui.Controls;assembly=Nihil.Maui.Controls"
+						 x:Class="Nihil.Maui.Controls.AdvancedEntry">
+
+	<syncfusion:SfTextInputLayout x:Name="inputLayout"
+								  ContainerType="Outlined">
+		<Entry x:Name="txtEntry"
+			   TextChanged="Entry_TextChanged" />
+	</syncfusion:SfTextInputLayout>
+</nihil:AdvancedEntryBase>

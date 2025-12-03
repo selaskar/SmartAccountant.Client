@@ -86,5 +86,14 @@ namespace SmartAccountant.ApiClient.Resources {
                 return ResourceManager.GetString("CannotFetchTransactions", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while updating the debit transaction..
+        /// </summary>
+        internal static string CannotUpdateDebitTransaction {
+            get {
+                return ResourceManager.GetString("CannotUpdateDebitTransaction", resourceCulture);
+            }
+        }
     }
 }

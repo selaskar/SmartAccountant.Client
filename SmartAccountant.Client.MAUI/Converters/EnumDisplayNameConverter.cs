@@ -15,7 +15,7 @@ internal class EnumDisplayNameConverter : IValueConverter
         FieldInfo? fi = value.GetType().GetField(value.ToString()!);
         DisplayAttribute? attribute = fi?.GetCustomAttribute<DisplayAttribute>();
 
-        return attribute?.Name ?? value;
+        return attribute?.GetName() ?? value.ToString();
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUI.MSALClient", "MAUI.MSA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.globalconfig = .globalconfig
+		Directory.Build.props = Directory.Build.props
+		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -21,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.Client.Core", "SmartAccountant.Client.Core\SmartAccountant.Client.Core.csproj", "{A81B5B63-4AAA-4AD9-9BC4-2FBD56DE7474}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccountant.Client.Models", "SmartAccountant.Client.Models\SmartAccountant.Client.Models.csproj", "{E258FBE3-2CDE-436C-97DA-0BE645023718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nihil.Maui.Controls", "Nihil.Maui.Controls\Nihil.Maui.Controls.csproj", "{2CAEAB58-1FB6-4EAC-A95E-DCAF5064F5BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +64,10 @@ Global
 		{E258FBE3-2CDE-436C-97DA-0BE645023718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E258FBE3-2CDE-436C-97DA-0BE645023718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E258FBE3-2CDE-436C-97DA-0BE645023718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CAEAB58-1FB6-4EAC-A95E-DCAF5064F5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CAEAB58-1FB6-4EAC-A95E-DCAF5064F5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CAEAB58-1FB6-4EAC-A95E-DCAF5064F5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CAEAB58-1FB6-4EAC-A95E-DCAF5064F5BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

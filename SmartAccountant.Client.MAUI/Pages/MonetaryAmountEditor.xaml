@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:shared="clr-namespace:SmartAccountant.Shared;assembly=SmartAccountant.Shared"
+			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
+			 x:Class="SmartAccountant.Client.MAUI.Pages.MonetaryAmountEditor"
+			 x:Name="@this">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Picker Grid.Column="0"
+				Margin="5"
+				MinimumWidthRequest="90"
+				x:Name="currencyPicker"
+				ItemsSource="{Binding Currencies, Source={x:Reference @this}, x:DataType=pages:MonetaryAmountEditor}"
+				ItemDisplayBinding="{Binding .}"
+				SelectedIndexChanged="currencyPicker_SelectedIndexChanged"/>
+		
+		<Entry Grid.Column="1"
+			   Margin="5"
+			   HorizontalOptions="Fill"
+			   Keyboard="Numeric"
+			   MaxLength="20"
+			   x:Name="txtAmount">
+			<Entry.Resources>
+				<Style x:Key="InvalidEntryStyle"
+					   TargetType="Entry">
+					<Setter Property="TextColor"
+							Value="Red" />
+				</Style>
+				<Style x:Key="ValidEntryStyle"
+					   TargetType="Entry">
+					<Setter Property="TextColor"
+							Value="Black" />
+				</Style>
+			</Entry.Resources>
+			<Entry.Behaviors>
+				<toolkit:NumericValidationBehavior Flags="ValidateOnValueChanged"
+												   MinimumValue="{x:Static shared:ApplicationDefinitions.MinTransactionAmount}"
+												   MaximumValue="{x:Static shared:ApplicationDefinitions.MaxTransactionAmount}"
+												   MaximumDecimalPlaces="2"
+												   InvalidStyle="{StaticResource InvalidEntryStyle}"
+												   ValidStyle="{StaticResource ValidEntryStyle}" />
+
+				<toolkit:UserStoppedTypingBehavior BindingContext="{Binding Path=BindingContext, Source={x:Reference txtAmount}, x:DataType=Entry}"
+												   Command="{Binding SetAmountCommand, Source={x:Reference @this}}"
+												   StoppedTypingTimeThreshold="1000"
+												   ShouldDismissKeyboardAutomatically="True" />
+			</Entry.Behaviors>
+		</Entry>
+	</Grid>
+</ContentView>

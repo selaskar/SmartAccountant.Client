@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using SmartAccountant.Models;
+using SmartAccountant.Shared.Enums;
 
 namespace SmartAccountant.Client.MAUI.Converters;
 
@@ -7,16 +7,17 @@ internal class TransactionCategoryConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not TransactionCategory category)
+        if (value is not MainCategory category)
             return null;
 
-        return category.Category switch
+        return category switch
         {
             MainCategory.None => Colors.Navy,
             MainCategory.Expense => Colors.LightCyan,
             MainCategory.Income => Colors.Tan,
-            MainCategory.Saving => Colors.Snow,
+            MainCategory.Saving => Colors.DarkOliveGreen,
             MainCategory.InterestOrFee => Colors.Tomato,
+            MainCategory.Loan => Colors.DarkRed,
             _ => Colors.Black
         };
     }

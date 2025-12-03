@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.9" />
-    <PackageReference Include="SmartAccountant.Models" Version="1.0.20" />
+    <PackageReference Include="SmartAccountant.Dtos" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SmartAccountant.Client.Core\SmartAccountant.Client.Core.csproj" />
+    <ProjectReference Include="..\SmartAccountant.Client.Models\SmartAccountant.Client.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

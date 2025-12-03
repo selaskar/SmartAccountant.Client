@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Identity.Client" Version="4.77.1" />
+    <PackageReference Include="SmartAccountant.Shared" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

@@ -126,4 +126,7 @@
   <data name="CannotFetchTransactions" xml:space="preserve">
     <value>An error occurred while fetching transactions.</value>
   </data>
+  <data name="CannotUpdateDebitTransaction" xml:space="preserve">
+    <value>An error occurred while updating the debit transaction.</value>
+  </data>
 </root>

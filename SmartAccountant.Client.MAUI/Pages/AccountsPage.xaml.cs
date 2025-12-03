@@ -1,5 +1,5 @@
+using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels;
-using SmartAccountant.Models;
 
 namespace SmartAccountant.Client.MAUI.Pages;
 
@@ -17,9 +17,13 @@ public partial class AccountsPage : ContentPage
         if (e.Item is not Account account)
             return;
 
-        var navigationParameter = new Dictionary<string, object>
+        // We don't want to pass this parameter again,
+        // when user returns to the page.
+        // ShellNavigationQueryParameters (instead of Dictionary) ensures that.
+        // Otherwise, it unnecessarily fetches the transactions again.
+        var navigationParameter = new ShellNavigationQueryParameters
         {
-            { "AccountId", account.Id }
+            { TransactionsPageModel.AccountIdKey, account.Id }
         };
         await Shell.Current.GoToAsync("/transactions", navigationParameter);
     }

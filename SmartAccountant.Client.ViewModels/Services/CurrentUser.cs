@@ -17,4 +17,6 @@ internal class CurrentUser : ICurrentUser
     }
 
     public string? AccessToken => PublicClientSingleton.Instance.MSALClientHelper.AuthResult?.AccessToken;
+
+    public DateTimeOffset? ExpiresOn => PublicClientSingleton.Instance.MSALClientHelper.AuthResult?.ExpiresOn;
 }

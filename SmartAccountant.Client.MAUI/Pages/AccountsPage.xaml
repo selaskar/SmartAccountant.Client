@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
 			 xmlns:viewModels="clr-namespace:SmartAccountant.Client.ViewModels;assembly=SmartAccountant.Client.ViewModels"
-			 xmlns:models="clr-namespace:SmartAccountant.Models;assembly=SmartAccountant.Models"
+			 xmlns:models="clr-namespace:SmartAccountant.Client.Models;assembly=SmartAccountant.Client.Models"
 			 xmlns:pages="clr-namespace:SmartAccountant.Client.MAUI.Pages"
 			 x:Class="SmartAccountant.Client.MAUI.Pages.AccountsPage"
 			 x:DataType="viewModels:AccountsPageModel"
@@ -14,107 +15,106 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<RefreshView Grid.Row="0"
-					 Margin="5"
-					 WidthRequest="300"
-					 HorizontalOptions="Start"
-					 IsRefreshing="{Binding IsBusy}"
-					 Command="{Binding FetchAccountsCommand}">
-			<ScrollView>
-				<ScrollView.Resources>
-					<DataTemplate x:Key="saving"
-								  x:DataType="models:SavingAccount">
-						<ViewCell>
-							<Grid Margin="2">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
+		<syncfusion:SfPullToRefresh Grid.Row="0"
+									Margin="5"
+									WidthRequest="300"
+									HorizontalOptions="Start"
+									IsRefreshing="{Binding IsBusy}"
+									RefreshCommand="{Binding FetchAccountsCommand}">
+			<syncfusion:SfPullToRefresh.Resources>
+				<DataTemplate x:Key="saving"
+							  x:DataType="models:SavingAccount">
+					<ViewCell>
+						<Grid Margin="2">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
 
-								<RoundRectangle Grid.RowSpan="2"
-												CornerRadius="10"
-												BackgroundColor="Azure"
-												Opacity="0.5" />
+							<RoundRectangle Grid.RowSpan="2"
+											CornerRadius="10"
+											BackgroundColor="Azure"
+											Opacity="0.5" />
 
-								<Label Grid.Row="0"
-									   Margin="5"
-									   FontSize="24"
-									   Text="{Binding FriendlyName}" />
+							<Label Grid.Row="0"
+								   Margin="5"
+								   FontSize="24"
+								   Text="{Binding FriendlyName}" />
 
-								<Label Grid.Row="1"
-									   Margin="5"
-									   Text="Saving Account" />
-							</Grid>
-						</ViewCell>
-					</DataTemplate>
-					<DataTemplate x:Key="creditCard"
-								  x:DataType="models:CreditCard">
-						<ViewCell>
-							<Grid Margin="2">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
+							<Label Grid.Row="1"
+								   Margin="5"
+								   Text="Saving Account" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+				<DataTemplate x:Key="creditCard"
+							  x:DataType="models:CreditCard">
+					<ViewCell>
+						<Grid Margin="2">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
 
-								<RoundRectangle Grid.RowSpan="2"
-												CornerRadius="10"
-												BackgroundColor="Bisque"
-												Opacity="0.5" />
+							<RoundRectangle Grid.RowSpan="2"
+											CornerRadius="10"
+											BackgroundColor="Bisque"
+											Opacity="0.5" />
 
-								<Label Grid.Row="0"
-									   Margin="5"
-									   FontSize="24"
-									   Text="{Binding FriendlyName}" />
+							<Label Grid.Row="0"
+								   Margin="5"
+								   FontSize="24"
+								   Text="{Binding FriendlyName}" />
 
-								<Label Grid.Row="1"
-									   Margin="5"
-									   Text="Credit Card" />
-							</Grid>
-						</ViewCell>
-					</DataTemplate>
-					<DataTemplate x:Key="virtual"
-								  x:DataType="models:VirtualCard">
-						<ViewCell>
-							<Grid Margin="2">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
+							<Label Grid.Row="1"
+								   Margin="5"
+								   Text="Credit Card" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+				<DataTemplate x:Key="virtual"
+							  x:DataType="models:VirtualCard">
+					<ViewCell>
+						<Grid Margin="2">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
 
-								<RoundRectangle Grid.RowSpan="2"
-												CornerRadius="10"
-												BackgroundColor="GreenYellow"
-												Opacity="0.5" />
+							<RoundRectangle Grid.RowSpan="2"
+											CornerRadius="10"
+											BackgroundColor="GreenYellow"
+											Opacity="0.5" />
 
-								<Label Grid.Row="0"
-									   Margin="5"
-									   FontSize="24"
-									   Text="{Binding FriendlyName}" />
+							<Label Grid.Row="0"
+								   Margin="5"
+								   FontSize="24"
+								   Text="{Binding FriendlyName}" />
 
-								<Label Grid.Row="1"
-									   Margin="5"
-									   Text="Virtual Card" />
-							</Grid>
-						</ViewCell>
-					</DataTemplate>
+							<Label Grid.Row="1"
+								   Margin="5"
+								   Text="Virtual Card" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
 
-					<pages:AccountDataTemplateSelector x:Key="templateSelector"
-													   SavingAccountTemplate="{StaticResource saving}"
-													   CreditCardTemplate="{StaticResource creditCard}"
-													   VirtualCardTemplate="{StaticResource virtual}" />
-				</ScrollView.Resources>
+				<pages:AccountDataTemplateSelector x:Key="templateSelector"
+												   SavingAccountTemplate="{StaticResource saving}"
+												   CreditCardTemplate="{StaticResource creditCard}"
+												   VirtualCardTemplate="{StaticResource virtual}" />
+			</syncfusion:SfPullToRefresh.Resources>
 
-				<ListView Margin="0,0,5,0"
+			<syncfusion:SfPullToRefresh.PullableContent>
+				<ListView Margin="0,0,10,0"
 						  ItemsSource="{Binding Accounts}"
 						  ItemTapped="ListView_ItemTapped"
-						  ItemTemplate="{StaticResource templateSelector}">
-				</ListView>
-			</ScrollView>
-		</RefreshView>
+						  ItemTemplate="{StaticResource templateSelector}" />
+			</syncfusion:SfPullToRefresh.PullableContent>
+		</syncfusion:SfPullToRefresh>
 
 		<Button Grid.Row="1"
 				Margin="5"
 				Text="Refresh"
-				Command="{Binding RefreshCommand}" />
+				Command="{Binding FetchAccountsCommand}" />
 	</Grid>
 </ContentPage>

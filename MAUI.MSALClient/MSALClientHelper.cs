@@ -125,6 +125,7 @@ namespace MAUI.MSALClient
         /// </summary>
         /// <param name="scopes"></param>
         /// <returns> Access Token</returns>
+        /// <exception cref="OperationCanceledException"/>
         public async Task<string> SignInUserAndAcquireAccessToken(string[] scopes, CancellationToken cancellationToken)
         {
             if (this.PublicClientApplication == null)
