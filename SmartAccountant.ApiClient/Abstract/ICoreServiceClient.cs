@@ -20,4 +20,8 @@ public interface ICoreServiceClient
     /// <exception cref="CoreServiceException"/>
     /// <exception cref="OperationCanceledException"/>
     Task UpdateDebitTransactionAsync(DebitTransaction transaction, CancellationToken cancellationToken);
+
+    /// <exception cref="CoreServiceException"/>
+    /// <exception cref="OperationCanceledException"/>
+    Task UpdateCreditCardTransactionAsync(CreditCardTransaction transaction, CancellationToken cancellationToken);
 }

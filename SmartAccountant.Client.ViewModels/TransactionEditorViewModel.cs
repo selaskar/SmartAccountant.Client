@@ -14,9 +14,6 @@ public partial class TransactionEditorViewModel : ViewModelBase
 
     partial void OnTransactionChanged(Transaction? oldValue, Transaction? newValue)
     {
-        // Careful: Little hack to solve atomicity problem.
-        // When any of these properties are assigned first, they fire a changed callback and overwrite other properties of the source (newValue).
-        // Tuple syntax is to avoid defining additional local variables.
         if (newValue == null)
         {
             Date = DateOnly.FromDateTime(DateTime.Today);
@@ -25,6 +22,9 @@ public partial class TransactionEditorViewModel : ViewModelBase
         }
         else
         {
+            // Careful: Little hack to solve atomicity problem.
+            // When any of these properties are assigned first, they fire a changed callback and overwrite other properties of the source (newValue).
+            // Tuple syntax is to avoid defining additional local variables.
             (Date, Time, offset) = (
                 DateOnly.FromDateTime(newValue.Timestamp.Date),
                 TimeOnly.FromDateTime(newValue.Timestamp.DateTime),

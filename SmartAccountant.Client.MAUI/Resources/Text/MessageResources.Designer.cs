@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartAccountant.ApiClient.Resources {
+namespace SmartAccountant.Client.MAUI.Resources.Text {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace SmartAccountant.ApiClient.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class MessageResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal MessageResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SmartAccountant.ApiClient.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartAccountant.ApiClient.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartAccountant.Client.MAUI.Resources.Text.MessageResources", typeof(MessageResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace SmartAccountant.ApiClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while fetching accounts..
+        ///   Looks up a localized string similar to OK.
         /// </summary>
-        internal static string CannotFetchAccounts {
+        internal static string OK {
             get {
-                return ResourceManager.GetString("CannotFetchAccounts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while fetching balance summary..
-        /// </summary>
-        internal static string CannotFetchSummary {
-            get {
-                return ResourceManager.GetString("CannotFetchSummary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while fetching transactions..
-        /// </summary>
-        internal static string CannotFetchTransactions {
-            get {
-                return ResourceManager.GetString("CannotFetchTransactions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while updating the credit card transaction..
-        /// </summary>
-        internal static string CannotUpdateCreditCardTransaction {
-            get {
-                return ResourceManager.GetString("CannotUpdateCreditCardTransaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while updating the debit transaction..
-        /// </summary>
-        internal static string CannotUpdateDebitTransaction {
-            get {
-                return ResourceManager.GetString("CannotUpdateDebitTransaction", resourceCulture);
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
     }

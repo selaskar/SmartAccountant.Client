@@ -14,8 +14,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient<AccountsPageModel>();
         services.AddTransient<SignInPageModel>();
         services.AddTransient<SummaryPageModel>();
-        services.AddTransient<DebitTransactionDetailsPageModel>();
         services.AddTransient<TransactionsPageModel>();
+        services.AddTransient<DebitTransactionDetailsPageModel>();
+        services.AddTransient<CreditCardTransactionDetailsPageModel>();
 
         return services;
     }

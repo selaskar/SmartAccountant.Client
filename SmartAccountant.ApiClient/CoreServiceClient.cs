@@ -69,17 +69,33 @@ internal class CoreServiceClient(
         }
     }
 
+    /// <inheritdoc/>
     public async Task UpdateDebitTransactionAsync(DebitTransaction transaction, CancellationToken cancellationToken)
     {
         try
         {
             var client = await GetHttpClient(cancellationToken);
-            HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/api/transactions", transaction, cancellationToken);
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/api/transactions/debit", transaction, cancellationToken);
             responseMessage.EnsureSuccessStatusCode();
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
         {
             throw new CoreServiceException(Messages.CannotUpdateDebitTransaction, ex);
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task UpdateCreditCardTransactionAsync(CreditCardTransaction transaction, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var client = await GetHttpClient(cancellationToken);
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/api/transactions/cc", transaction, cancellationToken);
+            responseMessage.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        {
+            throw new CoreServiceException(Messages.CannotUpdateCreditCardTransaction, ex);
         }
     }
 

@@ -5,19 +5,25 @@ namespace SmartAccountant.Client.Core.Extensions;
 
 public static class EnumExtensions
 {
-    public static IEnumerable<EnumMember<T>> ToEnumMembers<T>(this IEnumerable<T> source) where T : Enum
+    public static IList<EnumMember<T>> ToEnumMembers<T>(this IEnumerable<T> source) where T : Enum
     {
+        // SfComboBox's SelectedValue binding doesn't work with an IEnumerable<> source.
+        // So we use IList<> instead.
+        List<EnumMember<T>> result = [];
+
         foreach (T item in source)
         {
             FieldInfo? fi = item.GetType().GetField(item.ToString()!);
             DisplayAttribute? displayAttribute = fi?.GetCustomAttribute<DisplayAttribute>(false);
 
-            yield return new EnumMember<T>
+            result.Add(new EnumMember<T>
             {
                 Value = item,
                 DisplayName = displayAttribute?.GetName() ?? item.ToString()
-            };
+            });
         }
+
+        return result;
     }
 }
 public readonly record struct EnumMember<T> where T : Enum

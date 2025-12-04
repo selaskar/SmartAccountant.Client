@@ -1,3 +1,4 @@
+using SmartAccountant.Client.MAUI.Resources.Text;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels;
 
@@ -20,8 +21,20 @@ public partial class TransactionsPage : ContentPage
         // See comments about ShellNavigationQueryParameters in AccountsPage.ListView_ItemTapped.
         var navigationParameter = new ShellNavigationQueryParameters
         {
-            { DebitTransactionDetailsPageModel.TransactionObjectKey, transaction }
+            { TransactionDetailsPageModel.TransactionObjectKey, transaction }
         };
-        await Shell.Current.GoToAsync("/details", navigationParameter);
+
+        switch (transaction)
+        {
+            case DebitTransaction:
+                await Shell.Current.GoToAsync("/details-debit", navigationParameter);
+                break;
+            case CreditCardTransaction:
+                await Shell.Current.GoToAsync("/details-creditCard", navigationParameter);
+                break;
+            default:
+                await DisplayAlert("Unsupported transaction type", $"Transaction type ({transaction.GetType().Name}) is not supported.", MessageResources.OK);
+                break;
+        }
     }
 }

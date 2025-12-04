@@ -61,6 +61,15 @@ namespace SmartAccountant.Client.MAUI.Resources.Text {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a provision state.
+        /// </summary>
+        public static string CreditCardTransactionDetailsPage_ProvisionState_Placeholder {
+            get {
+                return ResourceManager.GetString("CreditCardTransactionDetailsPage_ProvisionState_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remaining.
         /// </summary>
         public static string DebitTransactionDetailsPage_RemainingBalance_Label {
