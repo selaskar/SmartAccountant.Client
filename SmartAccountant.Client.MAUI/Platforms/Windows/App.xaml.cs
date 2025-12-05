@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace SmartAccountant.Client.MAUI.WinUI
 {
     /// <summary>
@@ -18,6 +17,15 @@ namespace SmartAccountant.Client.MAUI.WinUI
         public App()
         {
             InitializeComponent();
+
+            UnhandledException += App_UnhandledException;
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+
+            (Current.Application as MAUI.App)!.CurrentDomain_UnhandledException(sender, new System.UnhandledExceptionEventArgs(e.Exception, isTerminating: false));
         }
 
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();

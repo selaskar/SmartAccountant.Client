@@ -1,5 +1,9 @@
 # SmartAccountant.Client
 
+# Development Guidelines
+
+* There is no need to handle Operation/TaskCancelledExceptions, as they are handled globally.
+
 ## Emulator notes
 
 Make sure to enable Windows Hypervisor Platform

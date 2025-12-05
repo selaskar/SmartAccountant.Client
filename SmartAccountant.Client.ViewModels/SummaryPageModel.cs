@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SmartAccountant.ApiClient.Abstract;
+using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
@@ -48,7 +49,7 @@ public partial class SummaryPageModel : ViewModelBase
 
             Summary = await _serviceClient.GetMonthlySummary(month, cts.Token);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException)
+        catch (CoreServiceException ex)
         {
             _errorHandler.HandleError(ex);
         }

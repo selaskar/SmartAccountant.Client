@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SmartAccountant.ApiClient.Abstract;
+using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
@@ -37,7 +38,7 @@ public partial class TransactionsPageModel(IErrorHandler errorHandler, ICoreServ
                 .OrderByDescending(t => t.Timestamp)
                 .ToObservable();
         }
-        catch (Exception ex) when (ex is not OperationCanceledException)
+        catch (CoreServiceException ex)
         {
             errorHandler.HandleError(ex);
         }

@@ -38,12 +38,12 @@ public partial class SignInPageModel : ViewModelBase
             // If there is sign-in info, silently fetch access token.
             if (Username != null)
             {
-                var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+                using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
 
                 await SignIn(cts.Token);
             }
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _errorHandler.HandleError(ex);
         }
@@ -65,8 +65,7 @@ public partial class SignInPageModel : ViewModelBase
             await _authenticationService.SignIn(cancellationToken);
             Username = (await _currentUser.Account)?.GetDisplayName();
         }
-        catch (OperationCanceledException) { }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _errorHandler.HandleError(ex);
         }

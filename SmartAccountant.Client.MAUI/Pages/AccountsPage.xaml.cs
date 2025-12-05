@@ -17,6 +17,8 @@ public partial class AccountsPage : ContentPage
         if (e.Item is not Account account)
             return;
 
+        throw new Exception(Title);
+
         // We don't want to pass this parameter again,
         // when user returns to the page.
         // ShellNavigationQueryParameters (instead of Dictionary) ensures that.

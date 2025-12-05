@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Azure.Monitor.OpenTelemetry.Exporter;
 using CommunityToolkit.Maui;
 using MAUI.MSALClient;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +39,8 @@ internal static class MauiProgram
         IConfiguration appConfiguration = GetConfig();
         builder.Configuration.AddConfiguration(appConfiguration);
 
-        //TODO: move to config. explanation to readme
+        ConfigureLogging(builder.Services, appConfiguration);
+
         SyncfusionLicenseProvider.RegisterLicense(appConfiguration["Syncfusion:LicenseKey"]);
 
         ConfigureAuthentication(appConfiguration);
@@ -53,6 +55,14 @@ internal static class MauiProgram
         RegisterRoutes();
 
         return builder.Build();
+    }
+
+    private static void ConfigureLogging(IServiceCollection services, IConfiguration appConfiguration)
+    {
+        //OpenTelemetryBuilder.UseAzureMonitorExporter or ILoggingBuilder.AddOpenTelemetry don't work for some reason.
+        //This is the only working variation.
+        services.AddOpenTelemetry()
+            .WithLogging(x => x.AddAzureMonitorLogExporter(o => o.ConnectionString = appConfiguration["AzureMonitor:ConnectionString"]));        
     }
 
     private static void ConfigureAuthentication(IConfiguration appConfiguration)
