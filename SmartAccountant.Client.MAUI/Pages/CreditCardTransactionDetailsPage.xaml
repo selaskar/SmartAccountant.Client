@@ -13,53 +13,59 @@
 		<BackButtonBehavior Command="{Binding CancelCommand}" />
 	</Shell.BackButtonBehavior>
 
-	<ScrollView HorizontalOptions="Start"
-				MaximumWidthRequest="400">
-		<Grid Margin="15,5">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<!-- Width should match to the TransactionEditor's LabelColumnWidth.-->
-				<ColumnDefinition Width="85" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+	<Grid ColumnDefinitions="Auto">
+		<ScrollView HorizontalOptions="Start">
+			<Grid Margin="15,5">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<!-- Width should match to the TransactionEditor's LabelColumnWidth.-->
+					<ColumnDefinition Width="85" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-			<!-- LabelColumnWidth should match to column definition's width. -->
-			<!-- Since the view assigns itself a view model, this binding needs to use a relative source. -->
-			<pages:TransactionEditor Grid.Row="0"
-									 Grid.ColumnSpan="2"
-									 LabelColumnWidth="85"
-									 Transaction="{Binding Transaction, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewModels:CreditCardTransactionDetailsPageModel}}}" />
-
-
-			<sfInputs:SfComboBox Grid.Row="1"
-								 Grid.Column="1"
-								 Margin="5"
-								 HeightRequest="60"
-								 IsClearButtonVisible="False"
-								 Placeholder="{x:Static resx:Labels.CreditCardTransactionDetailsPage_ProvisionState_Placeholder}"
-								 ItemsSource="{Binding ProvisionStates}"
-								 DisplayMemberPath="DisplayName"
-								 SelectedValuePath="Value"
-								 SelectedValue="{Binding Transaction.ProvisionState, Mode=TwoWay}" />
+				<!-- LabelColumnWidth should match to column definition's width. -->
+				<!-- Since the view assigns itself a view model, this binding needs to use a relative source. -->
+				<pages:TransactionEditor Grid.Row="0"
+										 Grid.ColumnSpan="2"
+										 LabelColumnWidth="85"
+										 Transaction="{Binding Transaction, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewModels:CreditCardTransactionDetailsPageModel}}}" />
 
 
-			<Button Grid.Row="2"
-					Grid.Column="1"
-					Margin="5"
-					Text="Save"
-					Command="{Binding SaveCommand}" />
+				<sfInputs:SfComboBox Grid.Row="1"
+									 Grid.Column="1"
+									 Margin="5"
+									 HeightRequest="60"
+									 IsClearButtonVisible="False"
+									 Placeholder="{x:Static resx:Labels.CreditCardTransactionDetailsPage_ProvisionState_Placeholder}"
+									 ItemsSource="{Binding ProvisionStates}"
+									 DisplayMemberPath="DisplayName"
+									 SelectedValuePath="Value"
+									 SelectedValue="{Binding Transaction.ProvisionState, Mode=TwoWay}" />
 
 
-			<Button Grid.Row="3"
-					Grid.Column="1"
-					Margin="5"
-					Text="Cancel"
-					Command="{Binding CancelCommand}" />
-		</Grid>
-	</ScrollView>
+				<Button Grid.Row="2"
+						Grid.Column="1"
+						Margin="5"
+						Text="Save"
+						Command="{Binding SaveCommand}" />
+
+
+				<Button Grid.Row="3"
+						Grid.Column="1"
+						Margin="5"
+						Text="Cancel"
+						Command="{Binding CancelCommand}" />
+			</Grid>
+		</ScrollView>
+
+		<ActivityIndicator Background="LightGray"
+						   Opacity="0.5"
+						   IsRunning="{Binding IsBusy}"
+						   IsVisible="{Binding IsBusy}" />
+	</Grid>
 </ContentPage>

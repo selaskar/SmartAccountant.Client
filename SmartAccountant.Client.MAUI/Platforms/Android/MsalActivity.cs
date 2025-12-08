@@ -5,9 +5,9 @@ using Android.App;
 using Android.Content;
 using Microsoft.Identity.Client;
 
-namespace SmartAccountant.Maui.Platforms.Android
+namespace SmartAccountant.Client.Maui.Platforms.Android
 {
-    [Activity(Exported =true)]
+    [Activity(Exported = true)]
     [IntentFilter([Intent.ActionView],
         Categories = new[] { Intent.CategoryBrowsable, Intent.CategoryDefault },
         DataHost = "auth",

@@ -14,12 +14,13 @@
 
 		<syncfusion:SfPullToRefresh Grid.Row="0"
 									Margin="5"
-									WidthRequest="300"
 									HorizontalOptions="Start"
 									IsRefreshing="{Binding IsBusy}"
 									RefreshCommand="{Binding FetchTransactionsCommand}">
 			<syncfusion:SfPullToRefresh.PullableContent>
+				<!-- In Android, row height isn't automatically adjusted to content. HasUnevenRows=True helps achieve that. -->
 				<ListView Margin="0,0,10,0"
+						  HasUnevenRows="True"
 						  ItemTapped="ListView_ItemTapped"
 						  ItemsSource="{Binding Transactions}">
 					<ListView.ItemTemplate>

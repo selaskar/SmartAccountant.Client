@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SmartAccountant.ApiClient.Abstract;
+using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.Models;
 using SmartAccountant.Client.ViewModels.Services;
@@ -20,7 +22,7 @@ public partial class SummaryPageModel : ViewModelBase
         Months = Enumerable.Range(0, 12).Select(static x =>
             new DashboardMonth
             {
-                Label = DateTime.Today.AddMonths(-x).ToString("MMM-yy"),
+                Label = DateTime.Today.AddMonths(-x).ToString("MMM-yy", CultureInfo.CurrentCulture),
                 Value = DateOnly.FromDateTime(DateTime.Today).AddMonths(-x)
             }).ToObservable();
 
@@ -48,7 +50,7 @@ public partial class SummaryPageModel : ViewModelBase
 
             Summary = await _serviceClient.GetMonthlySummary(month, cts.Token);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException)
+        catch (CoreServiceException ex)
         {
             _errorHandler.HandleError(ex);
         }

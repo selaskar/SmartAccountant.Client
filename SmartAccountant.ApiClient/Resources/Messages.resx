@@ -132,4 +132,10 @@
   <data name="CannotUpdateDebitTransaction" xml:space="preserve">
     <value>An error occurred while updating the debit transaction.</value>
   </data>
+  <data name="EmptyMonthlySummaryResponse" xml:space="preserve">
+    <value>Monthly summary was unexpectedly null.</value>
+  </data>
+  <data name="UserNotAuthenticated" xml:space="preserve">
+    <value>No active session.</value>
+  </data>
 </root>

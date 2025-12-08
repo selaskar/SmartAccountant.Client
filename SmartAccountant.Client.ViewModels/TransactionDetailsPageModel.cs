@@ -2,12 +2,16 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SmartAccountant.ApiClient.Abstract;
+using SmartAccountant.ApiClient.Exceptions;
 using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Client.Models;
+using SmartAccountant.Client.ViewModels.Services;
 
 namespace SmartAccountant.Client.ViewModels;
 
-public abstract partial class TransactionDetailsPageModel(INavigationService navigationService, ICoreServiceClient coreServiceClient) 
+public abstract partial class TransactionDetailsPageModel(IErrorHandler errorHandler,
+    INavigationService navigationService,
+    ICoreServiceClient coreServiceClient)
     : ViewModelBase, IQueryAttributable
 {
     public const string TransactionObjectKey = "Transaction";
@@ -42,18 +46,32 @@ public abstract partial class TransactionDetailsPageModel(INavigationService nav
     [RelayCommand(CanExecute = nameof(CanSave))]
     private async Task Save(CancellationToken cancellationToken)
     {
+        IsBusy = true;
+
         Transaction!.EndEdit();
 
-        switch (Transaction)
+        try
         {
-            case DebitTransaction debitTransaction:
-                await coreServiceClient.UpdateDebitTransactionAsync(debitTransaction, cancellationToken);
-                break;
-            case CreditCardTransaction ccTransaction:
-                await coreServiceClient.UpdateCreditCardTransactionAsync(ccTransaction, cancellationToken);
-                break;
-            default:
-                break;
+            switch (Transaction)
+            {
+                case DebitTransaction debitTransaction:
+                    await coreServiceClient.UpdateDebitTransactionAsync(debitTransaction, cancellationToken);
+                    break;
+                case CreditCardTransaction ccTransaction:
+                    await coreServiceClient.UpdateCreditCardTransactionAsync(ccTransaction, cancellationToken);
+                    break;
+                default:
+                    break;
+            }
+        }        
+        catch (CoreServiceException ex)
+        {
+            errorHandler.HandleError(ex);
+            return;
+        }
+        finally
+        {
+            IsBusy = false;
         }
 
         navigationService.NavigateBack();

@@ -104,5 +104,23 @@ namespace SmartAccountant.ApiClient.Resources {
                 return ResourceManager.GetString("CannotUpdateDebitTransaction", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly summary was unexpectedly null..
+        /// </summary>
+        internal static string EmptyMonthlySummaryResponse {
+            get {
+                return ResourceManager.GetString("EmptyMonthlySummaryResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active session..
+        /// </summary>
+        internal static string UserNotAuthenticated {
+            get {
+                return ResourceManager.GetString("UserNotAuthenticated", resourceCulture);
+            }
+        }
     }
 }

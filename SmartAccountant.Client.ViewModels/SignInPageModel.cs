@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MAUI.MSALClient;
 using SmartAccountant.Client.Core.Abstract;
 using SmartAccountant.Client.Core.Extensions;
 using SmartAccountant.Client.ViewModels.Services;
@@ -38,12 +37,12 @@ public partial class SignInPageModel : ViewModelBase
             // If there is sign-in info, silently fetch access token.
             if (Username != null)
             {
-                var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+                using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
 
                 await SignIn(cts.Token);
             }
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _errorHandler.HandleError(ex);
         }
@@ -55,6 +54,7 @@ public partial class SignInPageModel : ViewModelBase
 
     private bool CanSignIn() => string.IsNullOrEmpty(Username);
 
+    /// <exception cref="OperationCanceledException"/>
     [RelayCommand(CanExecute = nameof(CanSignIn), IncludeCancelCommand = true)]
     private async Task SignIn(CancellationToken cancellationToken)
     {
@@ -65,8 +65,7 @@ public partial class SignInPageModel : ViewModelBase
             await _authenticationService.SignIn(cancellationToken);
             Username = (await _currentUser.Account)?.GetDisplayName();
         }
-        catch (OperationCanceledException) { }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _errorHandler.HandleError(ex);
         }

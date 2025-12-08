@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartAccountant.ApiClient.Abstract;
 using SmartAccountant.ApiClient.Exceptions;
@@ -11,13 +12,17 @@ using SmartAccountant.Client.Models;
 
 namespace SmartAccountant.ApiClient;
 
-internal class CoreServiceClient(
+//TODO: In Android, instead of OperationCanceledException, socket closed error is thrown,
+//when cancelling HttpClient requests.
+//Handle them separately and accurately (shouldn't handle similar, unrelated errors).
+internal partial class CoreServiceClient(
     IHttpClientFactory httpClientFactory,
     IOptions<CoreServiceOptions> options,
     ICurrentUser currentUser,
     IDateTimeService dateTimeService,
     IAuthenticationService authenticationService,
-    IMapper mapper)
+    IMapper mapper,
+    ILogger<CoreServiceClient> logger)
     : ICoreServiceClient, IDisposable
 {
     /// <inheritdoc/>
@@ -25,14 +30,21 @@ internal class CoreServiceClient(
     {
         try
         {
-            var client = await GetHttpClient(cancellationToken);
+            HttpClient client = await GetHttpClient(cancellationToken);
             var accounts = await client.GetFromJsonAsync<IEnumerable<Dtos.Account>>("/api/accounts", cancellationToken);
 
             return (accounts ?? []).Select(mapper.Map<Dtos.Account, Account>);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        catch (CoreServiceException ex)
         {
-            throw new CoreServiceException(Messages.CannotFetchAccounts, ex);
+            CoreServiceExceptionOccurred(ex);
+            throw;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            var coreServiceException = new CoreServiceException(Messages.CannotFetchAccounts, ex);
+            CoreServiceExceptionOccurred(coreServiceException);
+            throw coreServiceException;
         }
     }
 
@@ -41,14 +53,21 @@ internal class CoreServiceClient(
     {
         try
         {
-            var client = await GetHttpClient(cancellationToken);
+            HttpClient client = await GetHttpClient(cancellationToken);
             var transactions = await client.GetFromJsonAsync<IEnumerable<Dtos.Transaction>>($"/api/transactions?accountId={accountId}", cancellationToken);
 
             return (transactions ?? []).Select(mapper.Map<Dtos.Transaction, Transaction>);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        catch (CoreServiceException ex)
         {
-            throw new CoreServiceException(Messages.CannotFetchTransactions, ex);
+            CoreServiceExceptionOccurred(ex);
+            throw;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            var coreServiceException = new CoreServiceException(Messages.CannotFetchTransactions, ex);
+            CoreServiceExceptionOccurred(coreServiceException);
+            throw coreServiceException;
         }
     }
 
@@ -57,15 +76,22 @@ internal class CoreServiceClient(
     {
         try
         {
-            var client = await GetHttpClient(cancellationToken);
+            HttpClient client = await GetHttpClient(cancellationToken);
             var summary = await client.GetFromJsonAsync<Dtos.MonthlySummary>($"/api/summary?month={month:yyyy-MM-dd}", cancellationToken)
-                ?? throw new CoreServiceException("Monthly summary was unexpectedly null.");
+                ?? throw new CoreServiceException(Messages.EmptyMonthlySummaryResponse);
 
             return mapper.Map<Dtos.MonthlySummary, MonthlySummary>(summary);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        catch (CoreServiceException ex)
         {
-            throw new CoreServiceException(Messages.CannotFetchSummary, ex);
+            CoreServiceExceptionOccurred(ex);
+            throw;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            var coreServiceException = new CoreServiceException(Messages.CannotFetchSummary, ex);
+            CoreServiceExceptionOccurred(coreServiceException);
+            throw coreServiceException;
         }
     }
 
@@ -74,13 +100,20 @@ internal class CoreServiceClient(
     {
         try
         {
-            var client = await GetHttpClient(cancellationToken);
+            HttpClient client = await GetHttpClient(cancellationToken);
             HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/api/transactions/debit", transaction, cancellationToken);
             responseMessage.EnsureSuccessStatusCode();
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        catch (CoreServiceException ex)
         {
-            throw new CoreServiceException(Messages.CannotUpdateDebitTransaction, ex);
+            CoreServiceExceptionOccurred(ex);
+            throw;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            var coreServiceException = new CoreServiceException(Messages.CannotUpdateDebitTransaction, ex);
+            CoreServiceExceptionOccurred(coreServiceException);
+            throw coreServiceException;
         }
     }
 
@@ -89,13 +122,20 @@ internal class CoreServiceClient(
     {
         try
         {
-            var client = await GetHttpClient(cancellationToken);
+            HttpClient client = await GetHttpClient(cancellationToken);
             HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/api/transactions/cc", transaction, cancellationToken);
             responseMessage.EnsureSuccessStatusCode();
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not CoreServiceException)
+        catch (CoreServiceException ex)
         {
-            throw new CoreServiceException(Messages.CannotUpdateCreditCardTransaction, ex);
+            CoreServiceExceptionOccurred(ex);
+            throw;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            var coreServiceException = new CoreServiceException(Messages.CannotUpdateCreditCardTransaction, ex);
+            CoreServiceExceptionOccurred(coreServiceException);
+            throw coreServiceException;
         }
     }
 
@@ -131,13 +171,15 @@ internal class CoreServiceClient(
     private async Task SetAuthHeader(HttpClient httpClient, CancellationToken cancellationToken)
     {
         if (currentUser.AccessToken == null)
-            throw new CoreServiceException("No active session.");
+            throw new CoreServiceException(Messages.UserNotAuthenticated);
 
         if (currentUser.ExpiresOn!.Value.AddMinutes(-5) < dateTimeService.UtcNow)
-        {
             await authenticationService.SignIn(cancellationToken);
-        }
 
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", currentUser.AccessToken);
     }
+
+
+    [LoggerMessage(LogLevel.Error)]
+    private protected partial void CoreServiceExceptionOccurred(Exception ex);
 }

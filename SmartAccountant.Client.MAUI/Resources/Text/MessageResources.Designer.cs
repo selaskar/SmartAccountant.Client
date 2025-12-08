@@ -61,11 +61,38 @@ namespace SmartAccountant.Client.MAUI.Resources.Text {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unhandled error occurred. App will exit soon. (Error: {0}).
+        /// </summary>
+        internal static string AppExiting {
+            get {
+                return ResourceManager.GetString("AppExiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active session..
+        /// </summary>
+        internal static string UserNotAuthenticated {
+            get {
+                return ResourceManager.GetString("UserNotAuthenticated", resourceCulture);
             }
         }
     }

@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppExiting" xml:space="preserve">
+    <value>An unhandled error occurred. App will exit soon. (Error: {0})</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="UserNotAuthenticated" xml:space="preserve">
+    <value>No active session.</value>
   </data>
 </root>

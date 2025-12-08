@@ -1,3 +1,4 @@
+using SmartAccountant.Client.MAUI.Resources.Text;
 using SmartAccountant.Client.ViewModels.Services;
 
 namespace SmartAccountant.Client.MAUI.Services;
@@ -24,7 +25,7 @@ internal sealed partial class ModalErrorHandler : IErrorHandler, IDisposable
         {
             await _semaphore.WaitAsync();
             if (Shell.Current is Shell shell)
-                await shell.DisplayAlert("Error", ex.Message, "OK");
+                await shell.DisplayAlert(MessageResources.Error, ex.Message, MessageResources.OK);
         }
         finally
         {

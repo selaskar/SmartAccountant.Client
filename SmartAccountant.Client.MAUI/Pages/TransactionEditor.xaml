@@ -24,7 +24,7 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<!-- Take width as parameter -->
+			<!-- Takes width as parameter -->
 			<ColumnDefinition x:Name="labelColumn" Width="Auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>

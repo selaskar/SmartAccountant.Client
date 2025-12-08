@@ -17,7 +17,9 @@ internal sealed partial class DangerousHttpClientHandler : HttpClientHandler
             return false;
 #endif
 
-            return sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors || sslPolicyErrors == (SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateChainErrors);
+            return sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors 
+                || sslPolicyErrors == SslPolicyErrors.RemoteCertificateNameMismatch // In Windows, when using local IP address
+                || sslPolicyErrors == (SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateChainErrors); // In Android
         };
     }
 }
