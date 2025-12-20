@@ -12,7 +12,7 @@ internal class DateOnlyConverter : IValueConverter
         if (value is not DateOnly date)
             return null;
 
-        if (targetType != typeof(DateTime))
+        if (targetType != typeof(DateTime?))
             return null;
 
         return new DateTime(date, TimeOnly.MinValue, DateTimeKind.Unspecified);

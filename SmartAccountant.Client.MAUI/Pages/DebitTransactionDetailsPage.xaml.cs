@@ -8,6 +8,12 @@ public partial class DebitTransactionDetailsPage : ContentPage
 	{
 		InitializeComponent();
 
-		BindingContext =  viewModel;
-    }
+		BindingContext = viewModel;
+
+		// See https://github.com/dotnet/maui/issues/33139
+		Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+		{
+			Command = viewModel.CancelCommand,
+		});
+	}
 }
