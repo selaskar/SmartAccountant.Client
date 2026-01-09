@@ -19,7 +19,7 @@ namespace SmartAccountant.ApiClient.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Messages {
@@ -115,11 +115,20 @@ namespace SmartAccountant.ApiClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No active session..
+        ///   Looks up a localized string similar to You need to re-login to the application..
         /// </summary>
-        internal static string UserNotAuthenticated {
+        internal static string ReauthenticationRequired {
             get {
-                return ResourceManager.GetString("UserNotAuthenticated", resourceCulture);
+                return ResourceManager.GetString("ReauthenticationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have permission to perform the action..
+        /// </summary>
+        internal static string Unauthorized {
+            get {
+                return ResourceManager.GetString("Unauthorized", resourceCulture);
             }
         }
     }

@@ -25,7 +25,7 @@ internal sealed partial class ModalErrorHandler : IErrorHandler, IDisposable
         {
             await _semaphore.WaitAsync();
             if (Shell.Current is Shell shell)
-                await shell.DisplayAlert(MessageResources.Error, ex.Message, MessageResources.OK);
+                await shell.DisplayAlertAsync(MessageResources.Error, ex.Message, MessageResources.OK);
         }
         finally
         {

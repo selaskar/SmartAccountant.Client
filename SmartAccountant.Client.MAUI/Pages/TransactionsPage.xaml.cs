@@ -33,7 +33,7 @@ public partial class TransactionsPage : ContentPage
                 await Shell.Current.GoToAsync("/details-creditCard", navigationParameter);
                 break;
             default:
-                await DisplayAlert("Unsupported transaction type", $"Transaction type ({transaction.GetType().Name}) is not supported.", MessageResources.OK);
+                await DisplayAlertAsync("Unsupported transaction type", $"Transaction type ({transaction.GetType().Name}) is not supported.", MessageResources.OK);
                 break;
         }
     }

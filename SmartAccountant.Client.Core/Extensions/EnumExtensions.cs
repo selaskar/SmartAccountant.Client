@@ -13,7 +13,7 @@ public static class EnumExtensions
 
         foreach (T item in source)
         {
-            FieldInfo? fi = item.GetType().GetField(item.ToString()!);
+            FieldInfo? fi = item.GetType().GetField(item.ToString());
             DisplayAttribute? displayAttribute = fi?.GetCustomAttribute<DisplayAttribute>(false);
 
             result.Add(new EnumMember<T>

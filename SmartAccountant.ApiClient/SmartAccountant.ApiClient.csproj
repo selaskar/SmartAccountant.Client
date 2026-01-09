@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.1" />
-    <PackageReference Include="SmartAccountant.Dtos" Version="1.0.3" />
+    <PackageReference Include="SmartAccountant.Dtos" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>

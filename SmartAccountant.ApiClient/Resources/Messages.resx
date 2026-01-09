@@ -135,7 +135,10 @@
   <data name="EmptyMonthlySummaryResponse" xml:space="preserve">
     <value>Monthly summary was unexpectedly null.</value>
   </data>
-  <data name="UserNotAuthenticated" xml:space="preserve">
-    <value>No active session.</value>
+  <data name="ReauthenticationRequired" xml:space="preserve">
+    <value>You need to re-login to the application.</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>You don't have permission to perform the action.</value>
   </data>
 </root>
